@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.TestDataGeneration;
 
-public class CreateProjectTest extends BaseTest {
+public class ProjectTest extends BaseTest {
 
     @Test(groups = {"smoke", "userShouldBeLogin", "ProjectShouldBeCreated"}, description = "Creating new project with all fields")
     public void createNewProject() {
@@ -33,6 +33,23 @@ public class CreateProjectTest extends BaseTest {
         addProjectPage.isPageOpened();
         addProjectPage.createNewProject(project);
         Assert.assertEquals(addProjectPage.getErrorMessage(), "Field Name is a required field.");
+    }
+
+    @Test(groups = {"regression", "userShouldBeLogin", "ProjectShouldBeCreated"}, description = "Edit project")
+    public void editProject() {
+
+        Project updatedProject = TestDataGeneration.generateUpdateProject();
+
+        dashboardPage.isPageOpened();
+        dashboardPage.clickAddProjectLink();
+        addProjectPage.isPageOpened();
+        addProjectPage.clickProjectsLink();
+        projectsPage.clickEditProjectButton(project.getName());
+        addProjectPage.editProject(updatedProject);
+
+        Assert.assertEquals(projectsPage.getSuccessMessage(), "Successfully updated the project.");
+        Assert.assertTrue(projectsPage.isProjectCreated(updatedProject.getName()));
+
     }
 
     @Test(groups = {"smoke", "userShouldBeLogin", "ProjectShouldBeCreated"}, description = "Delete milestone {milestoneName}")
