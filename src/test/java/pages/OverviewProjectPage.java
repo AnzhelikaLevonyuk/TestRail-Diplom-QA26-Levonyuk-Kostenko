@@ -25,11 +25,13 @@ public class OverviewProjectPage extends BaseDashboardPage {
     public Project getProjectInfo() {
         Project resultProject;
         if (driver.findElement(PROJECT_ANNOUNCEMENT).isDisplayed()) {
-            resultProject = new Project.ProjectBuilder(driver.findElement(PROJECT_NAME).getText())
+            resultProject = Project.builder()
+                    .setName(driver.findElement(PROJECT_NAME).getText())
                     .setAnnouncement(driver.findElement(PROJECT_ANNOUNCEMENT).getText())
                     .build();
         } else {
-            resultProject = new Project.ProjectBuilder(driver.findElement(PROJECT_NAME).getText())
+            resultProject = Project.builder()
+                    .setName(driver.findElement(PROJECT_NAME).getText())
                     .build();
         }
         return resultProject;

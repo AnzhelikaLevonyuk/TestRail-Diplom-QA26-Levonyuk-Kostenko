@@ -3,6 +3,7 @@ package tests;
 import modals.ConfirmationModal;
 import models.Milestone;
 import models.Project;
+import models.Section;
 import models.TestCase;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
@@ -31,6 +32,7 @@ public abstract class BaseTest {
     protected Project project;
     protected Milestone milestone;
     protected TestCase testCase;
+    protected Section section;
 
 
     @BeforeMethod(alwaysRun = true)

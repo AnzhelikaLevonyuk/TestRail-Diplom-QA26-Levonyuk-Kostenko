@@ -14,9 +14,6 @@ public class AddProjectPage extends BasePage {
     private static final String ANNOUNCEMENT = "addEditProjectAnnouncement";
     private static final String CHECK_BOX_SHOW_THE_ANNOUNCEMENT = "addEditProjectShowAnnouncement";
     private static final String CHECK_BOX_ENABLE_TEST_CASE_APPROVALS = "addEditProjectCaseStatusesEnabled";
-    private static final String RADIO_BUTTON_SINGLE_REPOSITORY_FOR_ALL_CASES = "addEditProjectSuiteModeSingle";
-    private static final String RADIO_BUTTON_SINGLE_REPOSITORY_WITH_BASE_LINE_SUPPORT = "addEditProjectSuiteModeSingleBaseline";
-    private static final String RADIO_BUTTON_MULTIPLE_TEST = "addEditProjectSuiteModeMulti";
     private static final String ADD_PROJECT_BUTTON = "addEditProjectAddButton";
     private static final By PROJECTS_LINK = By.cssSelector("[data-testid = 'administrationSidebarProjects']");
 
@@ -50,6 +47,22 @@ public class AddProjectPage extends BasePage {
 
         if (project.isEnableTestCaseApprovals()) {
             new CheckBox(driver, CHECK_BOX_ENABLE_TEST_CASE_APPROVALS).check();
+        }
+        new Button(driver, ADD_PROJECT_BUTTON).click();
+    }
+
+    @Step("Editing project")
+    public void editProject(Project project) {
+        new Input(driver, PROJECT_NAME).clearValue();
+        new Input(driver, PROJECT_NAME).setValue(project.getName());
+        if (project.getAnnouncement() != null) {
+            new TextArea(driver, ANNOUNCEMENT).clearValue();
+            new TextArea(driver, ANNOUNCEMENT).setValue(project.getAnnouncement());
+        } else {
+            new TextArea(driver, ANNOUNCEMENT).setValue(project.getAnnouncement());
+        }
+        if (project.isShowAnnouncement()) {
+            new CheckBox(driver, CHECK_BOX_SHOW_THE_ANNOUNCEMENT).check();
         }
         new Button(driver, ADD_PROJECT_BUTTON).click();
     }
