@@ -1,0 +1,85 @@
+package utils;
+
+import com.github.javafaker.Faker;
+import enums.*;
+import models.Milestone;
+import models.Project;
+import models.Section;
+import models.TestCase;
+
+public class TestDataGeneration {
+    static Faker faker = new Faker();
+
+    public static Project generateProject() {
+        return  Project.builder()
+                .setName(faker.country().name() + faker.number().randomDigit())
+                .setShowAnnouncement(true)
+                .setAnnouncement(faker.address().cityName())
+                .setProjectType(ProjectType.SINGLE_REPO_FOR_ALL_CASES)
+                .setEnableTestCaseApprovals(true)
+                .build();
+    }
+
+    public static Project generateProjectWithoutName() {
+        return Project.builder()
+                .setName("")
+                .setShowAnnouncement(true)
+                .setAnnouncement(faker.address().cityName())
+                .setProjectType(ProjectType.SINGLE_REPO_FOR_ALL_CASES)
+                .setEnableTestCaseApprovals(true)
+                .build();
+    }
+
+    public static Project generateUpdateProject() {
+        return Project.builder()
+                .setName(faker.funnyName().name())
+                .setShowAnnouncement(true)
+                .setAnnouncement(faker.address().countryCode())
+                .build();
+    }
+
+
+
+    public static TestCase generateTestCase() {
+        return TestCase.builder()
+                .setTitle(faker.animal().name() + faker.number().randomDigit())
+                .setTemplate(Template.TEST_CASE_TEXT)
+                .setType(TestCaseType.COMPATIBILITY)
+                .setPriority(TestCasePriority.CRITICAL)
+                .setStatus(TestCaseStatus.DESIGN)
+                .setPreconditions("Preconditions")
+                .setSteps("Steps").setExpectedResult("Expected result")
+                .build();
+    }
+
+    public static TestCase generateTestCaseSteps() {
+        return TestCase.builder()
+                .setTitle(faker.animal().name() + faker.number().randomDigit())
+                .setTemplate(Template.TEST_CASE_STEPS)
+                .setType(TestCaseType.FUNCTIONAL)
+                .setPriority(TestCasePriority.MEDIUM)
+                .setStatus(TestCaseStatus.READY)
+                .setPreconditions("Preconditions")
+                .setStepDescription("Step_1")
+                .setStepsExpectedResult("Expected result_1")
+                .build();
+    }
+
+    public static Milestone generateMilestone() {
+        return Milestone.builder()
+                .setName(faker.color().name() + faker.number().randomDigit())
+                .setReferences("References")
+                .setDescription("Description")
+                .setStartDate("6/16/2024")
+                .setEndDate("6/30/2024")
+                .setMilestoneIsCompleted(true)
+                .build();
+    }
+
+    public static Section generateSection() {
+        return Section.builder()
+                .setName("Section"+ faker.number().randomDigit())
+                .setDescription("Description for section")
+                .build();
+    }
+}
