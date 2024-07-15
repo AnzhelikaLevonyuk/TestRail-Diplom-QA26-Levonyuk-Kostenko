@@ -7,7 +7,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import utils.PropertyReader;
 
 import java.io.File;
 
@@ -23,7 +22,6 @@ public class BaseDashboardPage extends BasePage {
     private static final By ATTACHMENT_LIST = By.cssSelector("[data-testid='attachmentListItem']");
     private static final By FILE_INPUT = By.xpath("//input[@class='dz-hidden-input'][last()]");
     private static final By DELETE_BUTTON = By.cssSelector("[data-testid='attachmentsTabLibraryDeleteAttachment']");
-    private static final String FILE_PATH = "src/test/resources/";
 
 
     public BaseDashboardPage(WebDriver driver) {
@@ -65,9 +63,7 @@ public class BaseDashboardPage extends BasePage {
     }
 
     @Step("Add attachment")
-    public void addAttachment() {
-
-        File uploadFile = new File(FILE_PATH, PropertyReader.getProperty("filename"));
+    public void addAttachment(File uploadFile) {
 
         new Button(driver, ADD_ATTACHMENT_BUTTON).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(ADD_ATTACHMENT_DIALOG_SUBMIT_BUTTON));

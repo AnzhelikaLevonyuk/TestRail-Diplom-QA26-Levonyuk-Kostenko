@@ -3,7 +3,10 @@ package tests;
 import models.TestCase;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import utils.PropertyReader;
 import utils.TestDataGeneration;
+
+import java.io.File;
 
 public class TestCaseTest extends BaseTest {
 
@@ -55,6 +58,7 @@ public class TestCaseTest extends BaseTest {
     @Test(groups = {"smoke", "userShouldBeLogin", "ProjectShouldBeCreated"}, description = "Creating new test case with attachment")
     public void createTestCaseWithAttachment() {
         testCase = TestDataGeneration.generateTestCase();
+        File uploadFile = new File(PropertyReader.getProperty("filename"));
 
         dashboardPage.isPageOpened();
         dashboardPage.openProject(project.getName());
@@ -64,7 +68,7 @@ public class TestCaseTest extends BaseTest {
         testCasesPage.clickAddTestCaseButton();
         addTestCasePage.isPageOpened();
         addTestCasePage.createTestCase(testCase);
-        addTestCasePage.addAttachment();
+        addTestCasePage.addAttachment(uploadFile);
         addTestCasePage.clickCreateTestCaseButton();
 
         Assert.assertEquals(testCaseInfoPage.getSuccessMessage(), "Successfully added the new test case. Add another");
