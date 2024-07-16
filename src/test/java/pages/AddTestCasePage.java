@@ -25,20 +25,21 @@ public class AddTestCasePage extends BaseDashboardPage {
     private static final By STEPS_EXPECTED_RESULT = By.cssSelector("[data-testid ='addEditCaseStepExpected']");
 
 
-    public AddTestCasePage(WebDriver driver) {
+    public AddTestCasePage(WebDriver driver)
+    {
         super(driver);
     }
 
     @Override
-    public void isPageOpened() {
+    public void isPageOpened()
+    {
         wait.until(ExpectedConditions.visibilityOf(new Button(driver, CREATE_TEST_CASE_BUTTON)));
     }
 
     @Step("Create new test-case")
-    public void createTestCase(TestCase testCase) {
-
+    public void createTestCase(TestCase testCase)
+    {
         new Input(driver, TITLE).setValue(testCase.getTitle());
-
         new DropDown(driver, driver.findElement(TEMPLATE)).selectByVisibleText(testCase.getTemplate().getName());
         new DropDown(driver, driver.findElement(TYPE)).selectByVisibleText(testCase.getType().getName());
         new DropDown(driver, driver.findElement(PRIORITY)).selectByVisibleText(testCase.getPriority().getName());
@@ -49,10 +50,9 @@ public class AddTestCasePage extends BaseDashboardPage {
     }
 
     @Step("Create new test-case")
-    public void createTestCaseSteps(TestCase testCase) {
-
+    public void createTestCaseSteps(TestCase testCase)
+    {
         new Input(driver, TITLE).setValue(testCase.getTitle());
-
         new DropDown(driver, driver.findElement(TEMPLATE)).selectByVisibleText(testCase.getTemplate().getName());
         try {
             Thread.sleep(2000);
@@ -69,8 +69,30 @@ public class AddTestCasePage extends BaseDashboardPage {
     }
 
     @Step("Click 'Create Test Case' button")
-    public void clickCreateTestCaseButton() {
+    public void clickCreateTestCaseButton()
+    {
         new Button(driver, CREATE_TEST_CASE_BUTTON).click();
     }
 
+    @Step("Editing test Case")
+    public void editTestCase(TestCase testCase)
+    {
+        new Input(driver, TITLE).clearValue();
+        new Input(driver, TITLE).setValue(testCase.getTitle());
+        if (testCase.getType() != null) {
+            new DropDown(driver, driver.findElement(TYPE)).selectByVisibleText(testCase.getType().getName());
+        }
+        if (testCase.getPriority() != null) {
+            new DropDown(driver, driver.findElement(PRIORITY)).selectByVisibleText(testCase.getPriority().getName());
+        }
+        if (testCase.getStatus() != null) {
+            new DropDown(driver, driver.findElement(STATUS)).selectByVisibleText(testCase.getStatus().getName());
+        }
+        new TextArea(driver, driver.findElement(PRECONDITION)).clearValue();
+        new TextArea(driver, driver.findElement(PRECONDITION)).setValue(testCase.getPreconditions());
+        new TextArea(driver, driver.findElement(STEPS)).clearValue();
+        new TextArea(driver, driver.findElement(STEPS)).setValue(testCase.getSteps());
+        new TextArea(driver, driver.findElement(EXPECTED_RESULT)).clearValue();
+        new TextArea(driver, driver.findElement(EXPECTED_RESULT)).setValue(testCase.getExpectedResult());
+    }
 }

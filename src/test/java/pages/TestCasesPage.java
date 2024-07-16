@@ -15,30 +15,41 @@ public class TestCasesPage extends BaseDashboardPage {
     private static final By SECTION_DESCRIPTION = By.id("editSectionDescription_display");
     private static final By ADD_SECTION = By.id("editSectionSubmit");
 
+    private static final String TEST_CASE_TITLE = "//tbody/tr/following-sibling::tr[starts-with(@id, 'row')]//span[text()='%s']";
 
-    public TestCasesPage(WebDriver driver) {
+    public TestCasesPage(WebDriver driver)
+    {
         super(driver);
     }
 
     @Step("Click 'Add Test Case' button")
-    public void clickAddTestCaseButton() {
+    public void clickAddTestCaseButton()
+    {
         new Button(driver, ADD_TEST_CASE_BUTTON).click();
     }
 
     @Step("Click 'Add Section' button")
-    public void clickAddSectionButton() {
+    public void clickAddSectionButton()
+    {
         new Button(driver, ADD_SECTION_BUTTON).click();
     }
 
     @Step("Creating new Section")
-    public void createSection(Section section) {
+    public void createSection(Section section)
+    {
         new Input(driver, SECTION_NAME).setValue(section.getName());
         new TextArea(driver, SECTION_DESCRIPTION).setValue(section.getDescription());
     }
 
     @Step("Click 'Add Section' button")
-    public void clickAddSection() {
+    public void clickAddSection()
+    {
         new Button(driver, ADD_SECTION).click();
     }
 
+    @Step("Click TestCase Link by name = '{testCaseName}'")
+    public void clickTestCaseLinkByName(String testCaseTitle)
+    {
+        driver.findElement(By.xpath(String.format(TEST_CASE_TITLE, testCaseTitle))).click();
+    }
 }
