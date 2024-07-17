@@ -11,7 +11,7 @@ public class TestDataGeneration {
     static Faker faker = new Faker();
 
     public static Project generateProject() {
-        return  Project.builder()
+        return Project.builder()
                 .setName(faker.country().name() + faker.number().randomDigit())
                 .setShowAnnouncement(true)
                 .setAnnouncement(faker.address().cityName())
@@ -39,7 +39,6 @@ public class TestDataGeneration {
     }
 
 
-
     public static TestCase generateTestCase() {
         return TestCase.builder()
                 .setTitle(faker.animal().name() + faker.number().randomDigit())
@@ -65,6 +64,19 @@ public class TestDataGeneration {
                 .build();
     }
 
+    public static TestCase generateEditTestCaseSteps() {
+        return TestCase.builder()
+                .setTitle(faker.color().name() + faker.number().randomDigit())
+                .setTemplate(Template.TEST_CASE_STEPS)
+                .setType(TestCaseType.COMPATIBILITY)
+                .setPriority(TestCasePriority.CRITICAL)
+                .setStatus(TestCaseStatus.DESIGN)
+                .setPreconditions("Preconditions")
+                .setStepDescription("Step_1")
+                .setStepsExpectedResult("Expected result_1")
+                .build();
+    }
+
     public static Milestone generateMilestone() {
         return Milestone.builder()
                 .setName(faker.color().name() + faker.number().randomDigit())
@@ -78,8 +90,26 @@ public class TestDataGeneration {
 
     public static Section generateSection() {
         return Section.builder()
-                .setName("Section"+ faker.number().randomDigit())
+                .setName("Section" + faker.number().randomDigit())
                 .setDescription("Description for section")
+                .build();
+    }
+
+    public static Section generateEditSection() {
+        return Section.builder()
+                .setName("Section_EDIT" + faker.color().name())
+                .build();
+    }
+
+    public static TestCase generateUpdateTestCase() {
+        return TestCase.builder()
+                .setTitle(faker.animal().name() + faker.number().randomDigit())
+                .setType(TestCaseType.ACCEPTANCE)
+                .setPriority(TestCasePriority.MEDIUM)
+                .setStatus(TestCaseStatus.REVIEW)
+                .setPreconditions("New Preconditions")
+                .setSteps("New Steps")
+                .setExpectedResult("New Expected result")
                 .build();
     }
 }

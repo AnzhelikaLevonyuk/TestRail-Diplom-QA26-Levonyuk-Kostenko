@@ -58,7 +58,7 @@ public class TestCaseTest extends BaseTest {
     @Test(groups = {"smoke", "userShouldBeLogin", "ProjectShouldBeCreated"}, description = "Creating new test case with attachment")
     public void createTestCaseWithAttachment() {
         testCase = TestDataGeneration.generateTestCase();
-        File uploadFile = new File(PropertyReader.getProperty("filename"));
+        File uploadFile = new File(PropertyReader.getProperty("filepath"));
 
         dashboardPage.isPageOpened();
         dashboardPage.openProject(project.getName());
@@ -72,6 +72,44 @@ public class TestCaseTest extends BaseTest {
         addTestCasePage.clickCreateTestCaseButton();
 
         Assert.assertEquals(testCaseInfoPage.getSuccessMessage(), "Successfully added the new test case. Add another");
-        Assert.assertTrue(testCaseInfoPage.isAttachmentDisplayed());
+        Assert.assertTrue(testCasesPage.isAttachmentDisplayed());
     }
+
+    @Test(groups = {"smoke", "userShouldBeLogin", "ProjectShouldBeCreated"}, description = "Complete test for TestCase")
+    public void TestCaseCompleteTest() {
+
+        testCase = TestDataGeneration.generateTestCase();
+        TestCase editedTestCase = TestDataGeneration.generateEditTestCaseSteps();
+        File uploadFile = new File(PropertyReader.getProperty("filepath"));
+
+        dashboardPage.isPageOpened();
+        dashboardPage.openProject(project.getName());
+        overviewProjectPage.isPageOpened();
+        overviewProjectPage.clickTestCasesTab();
+        testCasesPage.isPageOpened();
+        testCasesPage.clickAddTestCaseButton();
+        addTestCasePage.isPageOpened();
+        addTestCasePage.createTestCase(testCase);
+        addTestCasePage.clickCreateTestCaseButton();
+        testCaseInfoPage.clickEditTestCaseButton();
+        addTestCasePage.addAttachment(uploadFile);
+        addTestCasePage.editTestCaseToTestCaseSteps(editedTestCase);
+        addTestCasePage.clickCreateTestCaseButton();
+        Assert.assertEquals(testCaseInfoPage.getSuccessMessage(), "Successfully updated the test case.");
+        Assert.assertTrue(testCasesPage.isAttachmentDisplayed());
+        TestCase actualTestCase = testCaseInfoPage.getTestCaseStepsInfo();
+        Assert.assertEquals(actualTestCase, editedTestCase);
+        testCaseInfoPage.clickTestCasesTab();
+        testCasesPage.clickDeleteTestCaseButton(editedTestCase.getTitle());
+
+        confirmationModalForTestCase.waitConfirmationDialogToTestCaseIsDisplayed();
+        confirmationModalForTestCase.clickDeletePermanentlyButton();
+        confirmationModalForTestCase.waitSecondConfirmationDialogToTestCaseIsDisplayed();
+        confirmationModalForTestCase.clickSecondDeletePermanentlyButton();
+
+        testCasesPage.waiting();
+        Assert.assertFalse(testCasesPage.isTestCaseCreated(editedTestCase.getTitle()));
+
+    }
+
 }

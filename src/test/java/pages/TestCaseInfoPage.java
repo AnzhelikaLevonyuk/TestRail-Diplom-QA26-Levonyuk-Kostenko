@@ -1,5 +1,6 @@
 package pages;
 
+import decorators.Button;
 import enums.TestCasePriority;
 import enums.TestCaseStatus;
 import enums.TestCaseType;
@@ -7,13 +8,9 @@ import io.qameta.allure.Step;
 import models.TestCase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import utils.PropertyReader;
 
-import java.util.List;
-
-public class TestCaseInfoPage extends BasePage {
+public class TestCaseInfoPage extends BaseDashboardPage {
 
 
     private static final By TITLE = By.cssSelector("[data-testid ='testCaseContentHeaderTitle']");
@@ -25,9 +22,7 @@ public class TestCaseInfoPage extends BasePage {
     private static final By EXPECTED_RESULT = By.xpath("//span[text() = 'Expected Result']/../following-sibling::div[@class='field-content']//p");
     private static final By STEPS_EXPECTED_RESULT = By.cssSelector(".step-content + .hidden-vertical  div p");
     private static final By STEPS_DESCRIPTION = By.xpath("//div[@class= 'hidden-vertical']/div/p");
-
-    private static final String ATTACHMENT = "//div[contains(@title, '%s')]";
-    private static final By SECTION_LIST = By.cssSelector(".groupTreeContainer a span");
+    private static final By EDIT_BUTTON_TEST_CASE = By.cssSelector("[data-testid ='testCaseEditButton']");
 
 
     public TestCaseInfoPage(WebDriver driver) {
@@ -65,13 +60,10 @@ public class TestCaseInfoPage extends BasePage {
         return resultTestCase;
     }
 
-    public boolean isAttachmentDisplayed() {
-        return driver.findElement(By.xpath(String.format(ATTACHMENT, PropertyReader.getProperty("filename")))).isDisplayed();
+    @Step("Click 'Edit Test case' button")
+    public void clickEditTestCaseButton() {
+        new Button(driver, EDIT_BUTTON_TEST_CASE).click();
     }
 
-    @Step("Check {sectionName} in the list")
-    public boolean isSectionCreated(String sectionName) {
-        List<WebElement> sectionLists = driver.findElements(SECTION_LIST);
-        return sectionLists.stream().anyMatch(section -> section.getText().equals(sectionName));
-    }
+
 }
