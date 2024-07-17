@@ -24,8 +24,8 @@ public class TestCaseInfoPage extends BaseDashboardPage {
     private static final By PRECONDITIONS = By.xpath("//span[text() = 'Preconditions']/../following-sibling::div[@class='field-content'][1]//p");
     private static final By STEPS = By.xpath("//span[text() = 'Steps']/../following-sibling::div[@class='field-content'][1]//p");
     private static final By EXPECTED_RESULT = By.xpath("//span[text() = 'Expected Result']/../following-sibling::div[@class='field-content']//p");
-    private static final By STEPS_EXPECTED_RESULT = By.xpath("//*[text()='Expected Result']//following::p");
-    private static final By STEPS_DESCRIPTION = By.xpath("//*[text()='Steps']//following::p");
+    private static final By STEPS_EXPECTED_RESULT = By.cssSelector(".step-content + .hidden-vertical  div p");
+    private static final By STEPS_DESCRIPTION = By.xpath("//div[@class= 'hidden-vertical']/div/p");
 
     private static final String ATTACHMENT = "//div[contains(@title, '%s')]";
     private static final By SECTION_LIST = By.cssSelector(".groupTreeContainer a span");
