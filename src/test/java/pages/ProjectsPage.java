@@ -6,12 +6,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
 public class ProjectsPage extends BaseDashboardPage {
     private static final By PROJECTS_LIST = By.cssSelector(".hoverSensitive td a");
+
     private static final String EDIT_PROJECT_CONTAINER = "//a[text()='%s']/following::div[@data-testid='projectEditButton']";
     private static final String PROJECT_CONTAINER = "//td/a[text() = '%s']";
     private static final String OPEN_OVERVIEW_PROJECT_BUTTON_CONTAINER = ("//a[text() = '%s']/following-sibling:: span/a");
@@ -23,9 +23,6 @@ public class ProjectsPage extends BaseDashboardPage {
         super(driver);
     }
 
-    public void waitingForProjectsPage() {
-        wait.until(ExpectedConditions.elementToBeClickable(QUESTION_BUTTON));
-    }
 
     @Step("Check {projectName} project in the list on Projects page")
     public boolean isProjectCreated(String projectName) {
@@ -34,15 +31,16 @@ public class ProjectsPage extends BaseDashboardPage {
     }
 
     @Step("Click 'Delete project' button")
-    public void clickDeleteProjectButton(String projectName)
-    {
-        waitingForProjectsPage();
+  
+    public void clickDeleteProjectButton(String projectName) {
+        waitingUploadingQuestionIcon();
+
         driver.findElement(By.xpath(String.format(DELETE_PROJECT_CONTAINER, projectName))).click();
     }
 
     @Step("Click 'Edit project' button")
     public void clickEditProjectButton(String projectName) {
-        waitingForProjectsPage();
+        waitingUploadingQuestionIcon();
         driver.findElement(By.xpath(String.format(EDIT_PROJECT_CONTAINER, projectName))).click();
     }
 

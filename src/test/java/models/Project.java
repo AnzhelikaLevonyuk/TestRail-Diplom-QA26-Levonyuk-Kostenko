@@ -11,6 +11,7 @@ import lombok.EqualsAndHashCode;
 public class Project {
     private String name;
     private String announcement;
+
     @EqualsAndHashCode.Exclude
     private boolean showAnnouncement;
     @EqualsAndHashCode.Exclude

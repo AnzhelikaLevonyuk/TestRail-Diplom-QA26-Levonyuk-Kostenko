@@ -22,6 +22,7 @@ public class BaseDashboardPage extends BasePage {
     private static final By ATTACHMENT_LIST = By.cssSelector("[data-testid='attachmentListItem']");
     private static final By FILE_INPUT = By.xpath("//input[@class='dz-hidden-input'][last()]");
     private static final By DELETE_BUTTON = By.cssSelector("[data-testid='attachmentsTabLibraryDeleteAttachment']");
+    private static final By QUESTION_BUTTON = By.id("_pendo-badge_Hhf7H23vJ3hk1jdtR271Im-1A3o");
 
 
     public BaseDashboardPage(WebDriver driver) {
@@ -72,5 +73,17 @@ public class BaseDashboardPage extends BasePage {
         new Button(driver, ADD_ATTACHMENT_DIALOG_SUBMIT_BUTTON).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(ATTACHMENT_LIST));
 
+    }
+
+    public void waitingUploadingQuestionIcon() {
+        wait.until(ExpectedConditions.elementToBeClickable(QUESTION_BUTTON));
+    }
+
+    public void waiting() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

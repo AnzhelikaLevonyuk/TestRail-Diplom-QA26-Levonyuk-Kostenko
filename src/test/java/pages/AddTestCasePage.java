@@ -58,15 +58,43 @@ public class AddTestCasePage extends BaseDashboardPage {
     {
         new Input(driver, TITLE).setValue(testCase.getTitle());
         new DropDown(driver, driver.findElement(TEMPLATE)).selectByVisibleText(testCase.getTemplate().getName());
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        waiting();
         new DropDown(driver, driver.findElement(TYPE)).selectByVisibleText(testCase.getType().getName());
         new DropDown(driver, driver.findElement(PRIORITY)).selectByVisibleText(testCase.getPriority().getName());
         new DropDown(driver, driver.findElement(STATUS)).selectByVisibleText(testCase.getStatus().getName());
         new TextArea(driver, driver.findElement(PRECONDITION)).setValue(testCase.getPreconditions());
+        new Button(driver, ADD_STEP_BUTTON).click();
+        new TextArea(driver, driver.findElement(STEPS_STEP_DESCRIPTION)).setValue(testCase.getStepDescription());
+        new TextArea(driver, driver.findElement(STEPS_EXPECTED_RESULT)).setValue(testCase.getStepsExpectedResult());
+    }
+
+    @Step("Editing test Case")
+    public void editTestCase(TestCase testCase) {
+        new Input(driver, TITLE).clearValue();
+        new Input(driver, TITLE).setValue(testCase.getTitle());
+        if (testCase.getType() != null) {
+            new DropDown(driver, driver.findElement(TYPE)).selectByVisibleText(testCase.getType().getName());
+        }
+        if (testCase.getPriority() != null) {
+            new DropDown(driver, driver.findElement(PRIORITY)).selectByVisibleText(testCase.getPriority().getName());
+        }
+        if (testCase.getStatus() != null) {
+            new DropDown(driver, driver.findElement(STATUS)).selectByVisibleText(testCase.getStatus().getName());
+        }
+        new TextArea(driver, driver.findElement(PRECONDITION)).clearValue();
+        new TextArea(driver, driver.findElement(PRECONDITION)).setValue(testCase.getPreconditions());
+        new TextArea(driver, driver.findElement(STEPS)).clearValue();
+        new TextArea(driver, driver.findElement(STEPS)).setValue(testCase.getSteps());
+        new TextArea(driver, driver.findElement(EXPECTED_RESULT)).clearValue();
+        new TextArea(driver, driver.findElement(EXPECTED_RESULT)).setValue(testCase.getExpectedResult());
+    }
+
+    @Step("Editing test Case")
+    public void editTestCaseToTestCaseSteps(TestCase testCase) {
+        new Input(driver, TITLE).clearValue();
+        new Input(driver, TITLE).setValue(testCase.getTitle());
+        new DropDown(driver, driver.findElement(TEMPLATE)).selectByVisibleText(testCase.getTemplate().getName());
+        waiting();
         new Button(driver, ADD_STEP_BUTTON).click();
         new TextArea(driver, driver.findElement(STEPS_STEP_DESCRIPTION)).setValue(testCase.getStepDescription());
         new TextArea(driver, driver.findElement(STEPS_EXPECTED_RESULT)).setValue(testCase.getStepsExpectedResult());

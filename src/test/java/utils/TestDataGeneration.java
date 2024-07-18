@@ -10,8 +10,8 @@ import models.TestCase;
 public class TestDataGeneration {
     static Faker faker = new Faker();
 
-    public static Project generateProject()
-    {
+    public static Project generateProject() {
+  
         return Project.builder()
                 .setName(faker.country().name() + faker.number().randomDigit())
                 .setShowAnnouncement(true)
@@ -42,8 +42,8 @@ public class TestDataGeneration {
     }
 
 
-    public static TestCase generateTestCase()
-    {
+    public static TestCase generateTestCase() {
+
         return TestCase.builder()
                 .setTitle(faker.animal().name() + faker.number().randomDigit())
                 .setTemplate(Template.TEST_CASE_TEXT)
@@ -63,6 +63,20 @@ public class TestDataGeneration {
                 .setType(TestCaseType.FUNCTIONAL)
                 .setPriority(TestCasePriority.MEDIUM)
                 .setStatus(TestCaseStatus.READY)
+                .setPreconditions("Preconditions")
+                .setStepDescription("Step_1")
+                .setStepsExpectedResult("Expected result_1")
+                .build();
+    }
+
+
+    public static TestCase generateEditTestCaseSteps() {
+        return TestCase.builder()
+                .setTitle(faker.color().name() + faker.number().randomDigit())
+                .setTemplate(Template.TEST_CASE_STEPS)
+                .setType(TestCaseType.COMPATIBILITY)
+                .setPriority(TestCasePriority.CRITICAL)
+                .setStatus(TestCaseStatus.DESIGN)
                 .setPreconditions("Preconditions")
                 .setStepDescription("Step_1")
                 .setStepsExpectedResult("Expected result_1")
@@ -101,8 +115,14 @@ public class TestDataGeneration {
                 .build();
     }
 
-    public static TestCase generateUpdateTestCase()
-    {
+
+    public static Section generateEditSection() {
+        return Section.builder()
+                .setName("Section_EDIT" + faker.color().name())
+                .build();
+    }
+
+    public static TestCase generateUpdateTestCase() {
         return TestCase.builder()
                 .setTitle(faker.animal().name() + faker.number().randomDigit())
                 .setType(TestCaseType.ACCEPTANCE)
@@ -134,4 +154,5 @@ public class TestDataGeneration {
                 .setReferences("References")
                 .build();
     }
+
 }

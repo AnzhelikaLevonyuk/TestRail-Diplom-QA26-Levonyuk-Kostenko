@@ -13,6 +13,7 @@ public class DashboardPage extends BasePage {
     private static final By NAVIGATION_USERNAME = By.cssSelector(".navigation-username");
     private static final String ADD_PROJECT_LINK = "sidebarProjectsAddButton";
     private static final By DASHBOARD_LINK = By.id("navigation-dashboard");
+    private static final By TEST_CASES_TAB = By.xpath("//a[@id = 'navigation-suites' and contains(text(), 'Test Cases')]");
 
     public DashboardPage(WebDriver driver)
     {
@@ -34,6 +35,11 @@ public class DashboardPage extends BasePage {
     public void clickAddProjectLink()
     {
         new Button(driver, ADD_PROJECT_LINK).click();
+    }
+
+    @Step("Click 'Test Case' tab")
+    public void clickTestCaseTab() {
+        new Button(driver, TEST_CASES_TAB).click();
     }
 
     @Step("Click 'Dashboard' link")

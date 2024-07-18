@@ -11,8 +11,10 @@ public class ConfirmationModal extends BaseModal {
 
     private static final String OK_BUTTON = "caseFieldsTabDeleteDialogButtonOk";
     private static final By CONFIRMATION_DIALOG = By.id("dialog-ident-deleteDialog");
-    private static final By CHECK_BOX = By.xpath("//div[@id='dialog-ident-deleteDialog']//input[@data-testid = \"deleteCheckBoxTestId\"]");
+
+    private static final By CHECK_BOX = By.xpath("//div[@id='dialog-ident-deleteDialog']//input[@data-testid = 'deleteCheckBoxTestId']");
     private static final String CANCEL_BUTTON = "caseFieldsTabDeleteDialogButtonOk";
+
     public ConfirmationModal(WebDriver driver) {
         super(driver);
     }
@@ -29,6 +31,7 @@ public class ConfirmationModal extends BaseModal {
 
     @Step("Checking confirm delete checkbox")
     public void checkCheckbox() {
+        wait.until(ExpectedConditions.elementToBeClickable(CHECK_BOX));
         new CheckBox(driver, CHECK_BOX).check();
     }
 
