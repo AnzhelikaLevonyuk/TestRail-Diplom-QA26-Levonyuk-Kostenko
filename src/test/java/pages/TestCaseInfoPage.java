@@ -1,5 +1,6 @@
 package pages;
 
+import decorators.Button;
 import enums.TestCasePriority;
 import enums.TestCaseStatus;
 import enums.TestCaseType;
@@ -13,7 +14,7 @@ import utils.PropertyReader;
 
 import java.util.List;
 
-public class TestCaseInfoPage extends BasePage {
+public class TestCaseInfoPage extends BaseDashboardPage {
 
 
     private static final By TITLE = By.cssSelector("[data-testid ='testCaseContentHeaderTitle']");
@@ -28,6 +29,8 @@ public class TestCaseInfoPage extends BasePage {
 
     private static final String ATTACHMENT = "//div[contains(@title, '%s')]";
     private static final By SECTION_LIST = By.cssSelector(".groupTreeContainer a span");
+
+    private static final By EDIT_BUTTON_TEST_CASE = By.cssSelector("[data-testid ='testCaseEditButton']");
 
 
     public TestCaseInfoPage(WebDriver driver) {
@@ -73,5 +76,11 @@ public class TestCaseInfoPage extends BasePage {
     public boolean isSectionCreated(String sectionName) {
         List<WebElement> sectionLists = driver.findElements(SECTION_LIST);
         return sectionLists.stream().anyMatch(section -> section.getText().equals(sectionName));
+    }
+
+    @Step
+    public void clickEditTestCaseButton()
+    {
+        new Button(driver,EDIT_BUTTON_TEST_CASE).click();
     }
 }

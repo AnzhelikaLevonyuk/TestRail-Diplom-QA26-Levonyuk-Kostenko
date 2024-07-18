@@ -1,3 +1,4 @@
+
 package pages;
 
 import io.qameta.allure.Step;
@@ -11,10 +12,10 @@ import java.util.List;
 
 public class ProjectsPage extends BaseDashboardPage {
     private static final By PROJECTS_LIST = By.cssSelector(".hoverSensitive td a");
-    private static final String EDIT_PROJECT_CONTAINER = "//td/a[text()='%s']//ancestor::tr[@class = 'odd hoverSensitive']//div[@class = 'icon-small-edit']";
+    private static final String EDIT_PROJECT_CONTAINER = "//a[text()='%s']/following::div[@data-testid='projectEditButton']";
     private static final String PROJECT_CONTAINER = "//td/a[text() = '%s']";
     private static final String OPEN_OVERVIEW_PROJECT_BUTTON_CONTAINER = ("//a[text() = '%s']/following-sibling:: span/a");
-    private static final String DELETE_PROJECT_CONTAINER = "//td/a[text()='%s']//ancestor::tr[@class = 'odd hoverSensitive']//div[@class = 'icon-small-delete']";
+    private static final String DELETE_PROJECT_CONTAINER = "//a[text()='%s']/ancestor::tr//div[@data-testid='projectDeleteButton']";
     private static final By QUESTION_BUTTON = By.id("_pendo-badge_Hhf7H23vJ3hk1jdtR271Im-1A3o");
 
 
@@ -33,7 +34,8 @@ public class ProjectsPage extends BaseDashboardPage {
     }
 
     @Step("Click 'Delete project' button")
-    public void clickDeleteProjectButton(String projectName) {
+    public void clickDeleteProjectButton(String projectName)
+    {
         waitingForProjectsPage();
         driver.findElement(By.xpath(String.format(DELETE_PROJECT_CONTAINER, projectName))).click();
     }

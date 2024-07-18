@@ -67,13 +67,29 @@ public abstract class BaseTest {
     @BeforeMethod(dependsOnMethods = {"setUp", "userShouldBeLogIn"}, onlyForGroups = "ProjectShouldBeCreated", alwaysRun = true)
     public void beforeCreateProject() {
         project = TestDataGeneration.generateProject();
-
         dashboardPage.isPageOpened();
         dashboardPage.clickAddProjectLink();
         addProjectPage.isPageOpened();
         addProjectPage.createNewProject(project);
         projectsPage.returnToDashboardTab();
         dashboardPage.isPageOpened();
+    }
+    @BeforeMethod(dependsOnMethods = "beforeCreateProject", onlyForGroups = "TestCaseShouldBeCreated", alwaysRun = true)
+    public void beforeCreateTestCase()
+    {
+        testCase = TestDataGeneration.generateTestCase();
+
+        dashboardPage.openProject(project.getName());
+        overviewProjectPage.isPageOpened();
+        overviewProjectPage.clickTestCasesTab();
+        testCasesPage.isPageOpened();
+        testCasesPage.clickAddTestCaseButton();
+        addTestCasePage.isPageOpened();
+        addTestCasePage.createTestCase(testCase);
+        addTestCasePage.clickCreateTestCaseButton();
+        testCaseInfoPage.returnToDashboardTab();
+        dashboardPage.isPageOpened();
+
     }
 
     @AfterMethod(alwaysRun = true)

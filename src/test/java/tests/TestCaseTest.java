@@ -74,4 +74,46 @@ public class TestCaseTest extends BaseTest {
         Assert.assertEquals(testCaseInfoPage.getSuccessMessage(), "Successfully added the new test case. Add another");
         Assert.assertTrue(testCaseInfoPage.isAttachmentDisplayed());
     }
+
+    @Test(groups = {"regression", "userShouldBeLogin", "ProjectShouldBeCreated", "TestCaseShouldBeCreated"}, description = "Edit testcase")
+    public void editTestCase()
+    {
+        TestCase updateTestCase = TestDataGeneration.generateUpdateTestCase();
+
+        dashboardPage.openProject(project.getName());
+        overviewProjectPage.isPageOpened();
+        overviewProjectPage.clickTestCasesTab();
+        testCasesPage.isPageOpened();
+        testCasesPage.clickTestCaseLinkByName(testCase.getTitle());
+        testCaseInfoPage.isPageOpened();
+        testCaseInfoPage.clickEditTestCaseButton();
+        addTestCasePage.isPageOpened();
+        addTestCasePage.editTestCase(updateTestCase);
+        addTestCasePage.clickCreateTestCaseButton();
+        testCaseInfoPage.isPageOpened();
+
+        Assert.assertEquals(testCaseInfoPage.getSuccessMessage(), "Successfully updated the test case.");
+        TestCase actualTestCase = testCaseInfoPage.getTestCaseInfo();
+        Assert.assertEquals(actualTestCase, updateTestCase);
+
+    }
+
+    @Test(groups = {"regression", "userShouldBeLogin", "ProjectShouldBeCreated"}, description = "Creating new test case with invalid Estimate")
+    public void createTestCaseNegativeTest()
+    {
+        TestCase invalidTestCase = TestDataGeneration.generateInvalidEstimateTestCase();
+        dashboardPage.isPageOpened();
+        dashboardPage.openProject(project.getName());
+        overviewProjectPage.isPageOpened();
+        overviewProjectPage.clickTestCasesTab();
+        testCasesPage.isPageOpened();
+        testCasesPage.clickAddTestCaseButton();
+        addTestCasePage.isPageOpened();
+        addTestCasePage.createTestCase(invalidTestCase);
+        addTestCasePage.clickCreateTestCaseButton();
+
+        Assert.assertEquals(addTestCasePage.getExpectedErrorMessage(), "Field Estimate is not in a valid time span format.");
+    }
+
+
 }
