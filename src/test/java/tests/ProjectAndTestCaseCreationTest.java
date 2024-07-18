@@ -1,6 +1,5 @@
 package tests;
 
-import models.Project;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.PropertyReader;
@@ -8,10 +7,10 @@ import utils.TestDataGeneration;
 
 import java.io.File;
 
-public class EndToEndScenarioTest extends BaseTest {
+public class ProjectAndTestCaseCreationTest extends BaseTest {
 
     @Test(groups = {"regression","userShouldBeLogin"}, description = "Full Workflow Test")
-    public void completeTest()
+    public void createProjectAndTestCaseWithAttachmentTest()
     {
         project = TestDataGeneration.generateProject();
         testCase = TestDataGeneration.generateTestCase();
