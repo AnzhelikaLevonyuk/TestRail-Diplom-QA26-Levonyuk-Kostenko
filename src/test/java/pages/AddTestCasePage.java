@@ -23,7 +23,8 @@ public class AddTestCasePage extends BaseDashboardPage {
     private static final By ADD_STEP_BUTTON = By.cssSelector("[data-testid ='addEditCaseAddStep']");
     private static final By STEPS_STEP_DESCRIPTION = By.cssSelector("[data-testid ='addEditCaseStepContent']");
     private static final By STEPS_EXPECTED_RESULT = By.cssSelector("[data-testid ='addEditCaseStepExpected']");
-
+    private final static String ERROR_ESTIMATE_MESSAGE = "//div[contains(@class, 'message-error') and text()='Field Estimate is not in a valid time span format.']";
+    private final String estimateInput = "editCaseEstimate";
 
     public AddTestCasePage(WebDriver driver)
     {
@@ -45,6 +46,9 @@ public class AddTestCasePage extends BaseDashboardPage {
         new DropDown(driver, driver.findElement(PRIORITY)).selectByVisibleText(testCase.getPriority().getName());
         new DropDown(driver, driver.findElement(STATUS)).selectByVisibleText(testCase.getStatus().getName());
         new TextArea(driver, driver.findElement(PRECONDITION)).setValue(testCase.getPreconditions());
+        if (testCase.getEstimateInput() != null) {
+            new Input(driver, this.estimateInput).setValue(testCase.getEstimateInput());
+        }
         new TextArea(driver, driver.findElement(STEPS)).setValue(testCase.getSteps());
         new TextArea(driver, driver.findElement(EXPECTED_RESULT)).setValue(testCase.getExpectedResult());
     }
@@ -94,5 +98,10 @@ public class AddTestCasePage extends BaseDashboardPage {
         new TextArea(driver, driver.findElement(STEPS)).setValue(testCase.getSteps());
         new TextArea(driver, driver.findElement(EXPECTED_RESULT)).clearValue();
         new TextArea(driver, driver.findElement(EXPECTED_RESULT)).setValue(testCase.getExpectedResult());
+    }
+    @Step("Get Expected Error Message")
+    public String getExpectedErrorMessage()
+    {
+        return driver.findElement(By.xpath(ERROR_ESTIMATE_MESSAGE)).getText();
     }
 }

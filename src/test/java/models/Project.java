@@ -17,4 +17,6 @@ public class Project {
     private ProjectType projectType;
     @EqualsAndHashCode.Exclude
     private boolean enableTestCaseApprovals;
+    @EqualsAndHashCode.Exclude
+    private String references;
 }

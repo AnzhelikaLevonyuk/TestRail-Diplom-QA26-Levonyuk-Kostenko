@@ -10,7 +10,7 @@ import java.io.File;
 
 public class EndToEndScenarioTest extends BaseTest {
 
-    @Test(groups = {"regression"}, description = "Full Workflow Test")
+    @Test(groups = {"regression","userShouldBeLogin"}, description = "Full Workflow Test")
     public void completeTest()
     {
         project = TestDataGeneration.generateProject();
@@ -19,8 +19,7 @@ public class EndToEndScenarioTest extends BaseTest {
         testCase = TestDataGeneration.generateTestCase();
         File uploadFile = new File(PropertyReader.getProperty("filename"));
         section = TestDataGeneration.generateSection();
-        loginPage.isPageOpened();
-        loginPage.login(PropertyReader.getProperty("email"), PropertyReader.getProperty("password"));
+
         dashboardPage.isPageOpened();
         dashboardPage.clickAddProjectLink();
         addProjectPage.isPageOpened();

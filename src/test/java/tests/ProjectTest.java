@@ -91,4 +91,16 @@ public class ProjectTest extends BaseTest {
         Assert.assertEquals(projectsPage.getSuccessMessage(), "Successfully deleted the project.");
         Assert.assertFalse(projectsPage.isProjectCreated(project.getName()));
     }
+
+    @Test(groups = {"regression", "userShouldBeLogin", "ProjectShouldBeCreated"}, description = "Creating new project with invalid references")
+    public void createProjectNegativeTest()
+    {
+        this.project = TestDataGeneration.generateInvalidReferenciesProject();
+        dashboardPage.isPageOpened();
+        dashboardPage.clickAddProjectLink();
+        addProjectPage.isPageOpened();
+        addProjectPage.createProjectWithReferences(project);
+        Assert.assertEquals(addProjectPage.getErrorMessage(), "Field Reference View Url is not a valid URL.");
+
+    }
 }

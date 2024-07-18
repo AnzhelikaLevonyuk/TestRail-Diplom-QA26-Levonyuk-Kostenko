@@ -98,4 +98,22 @@ public class TestCaseTest extends BaseTest {
 
     }
 
+    @Test(groups = {"regression", "userShouldBeLogin", "ProjectShouldBeCreated"}, description = "Creating new test case with invalid Estimate")
+    public void createTestCaseNegativeTest()
+    {
+        TestCase invalidTestCase = TestDataGeneration.generateInvalidEstimateTestCase();
+        dashboardPage.isPageOpened();
+        dashboardPage.openProject(project.getName());
+        overviewProjectPage.isPageOpened();
+        overviewProjectPage.clickTestCasesTab();
+        testCasesPage.isPageOpened();
+        testCasesPage.clickAddTestCaseButton();
+        addTestCasePage.isPageOpened();
+        addTestCasePage.createTestCase(invalidTestCase);
+        addTestCasePage.clickCreateTestCaseButton();
+
+        Assert.assertEquals(addTestCasePage.getExpectedErrorMessage(), "Field Estimate is not in a valid time span format.");
+    }
+
+
 }

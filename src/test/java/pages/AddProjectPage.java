@@ -16,10 +16,9 @@ public class AddProjectPage extends BasePage {
     private static final String CHECK_BOX_ENABLE_TEST_CASE_APPROVALS = "addEditProjectCaseStatusesEnabled";
     private static final String ADD_PROJECT_BUTTON = "addEditProjectAddButton";
     private static final By PROJECTS_LINK = By.cssSelector("[data-testid = 'administrationSidebarProjects']");
-
-
     private static final By ERROR_MESSAGE = By.cssSelector("link + div");
-
+    private static final String REFERENCES_TAB = "//a[@id='projects-tabs-references']";
+    private static final By REFERENCES_INPUT = By.id("reference_id_url");
 
     public AddProjectPage(WebDriver driver) {
         super(driver);
@@ -50,6 +49,18 @@ public class AddProjectPage extends BasePage {
         }
         new Button(driver, ADD_PROJECT_BUTTON).click();
     }
+    @Step("Creating new project")
+    public void createProjectWithReferences(Project project) {
+        if (project.getName() != null) {
+            new Input(driver, PROJECT_NAME).setValue(project.getName());
+        }
+        clickReferencesTab();
+        if (project.getReferences() != null) {
+            new Input(driver,REFERENCES_INPUT).setValue(project.getReferences());
+        }
+
+        new Button(driver, ADD_PROJECT_BUTTON).click();
+    }
 
     @Step("Editing project")
     public void editProject(Project project) {
@@ -74,6 +85,11 @@ public class AddProjectPage extends BasePage {
     @Step("Click Projects link in Administration")
     public void clickProjectsLink() {
         driver.findElement(PROJECTS_LINK).click();
+    }
+    @Step("Click References Tab ")
+    public void clickReferencesTab()
+    {
+        driver.findElement(By.xpath(REFERENCES_TAB)).click();
     }
 
 }

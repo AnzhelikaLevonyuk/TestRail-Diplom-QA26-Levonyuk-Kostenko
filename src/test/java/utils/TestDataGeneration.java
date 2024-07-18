@@ -113,4 +113,25 @@ public class TestDataGeneration {
                 .setExpectedResult("New Expected result")
                 .build();
     }
+    public static TestCase generateInvalidEstimateTestCase()
+    {
+        return TestCase.builder()
+                .setTitle(faker.animal().name() + faker.number().randomDigit())
+                .setTemplate(Template.TEST_CASE_TEXT)
+                .setType(TestCaseType.COMPATIBILITY)
+                .setPriority(TestCasePriority.CRITICAL)
+                .setStatus(TestCaseStatus.DESIGN)
+                .setEstimateInput("twenty")
+                .setPreconditions("Preconditions")
+                .setSteps("Steps").setExpectedResult("Expected result")
+                .build();
+    }
+
+    public static Project generateInvalidReferenciesProject()
+    {
+        return Project.builder()
+                .setName(faker.country().name() + faker.number().randomDigit())
+                .setReferences("References")
+                .build();
+    }
 }
