@@ -26,18 +26,22 @@ public class TestCasesPage extends BaseDashboardPage {
     private static final String TEST_CASE_SECTION = "//span[text()='%s']/ancestor::tr";
     private static final String DELETE_TEST_CASE_BUTTON = "//span[text() = '%s']/../following::a[@class= 'deleteLink']";
 
+    private static final String TEST_CASE_TITLE = "//tbody/tr/following-sibling::tr[starts-with(@id, 'row')]//span[text()='%s']";
 
-    public TestCasesPage(WebDriver driver) {
+    public TestCasesPage(WebDriver driver)
+    {
         super(driver);
     }
 
     @Step("Click 'Add Test Case' button")
-    public void clickAddTestCaseButton() {
+    public void clickAddTestCaseButton()
+    {
         new Button(driver, ADD_TEST_CASE_BUTTON).click();
     }
 
     @Step("Click 'Add Section' button")
-    public void clickAddSectionButton() {
+    public void clickAddSectionButton()
+    {
         new Button(driver, ADD_SECTION_BUTTON).click();
     }
 
@@ -84,5 +88,6 @@ public class TestCasesPage extends BaseDashboardPage {
     public boolean isTestCaseCreated(String testCaseName) {
         List<WebElement> testCases = driver.findElements(TEST_CASES_LIST);
         return testCases.stream().anyMatch(milestone -> milestone.getText().equals(testCaseName));
+
     }
 }

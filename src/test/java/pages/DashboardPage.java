@@ -1,6 +1,7 @@
 package pages;
 
 import decorators.Button;
+import decorators.ElementDecorator;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,21 +15,25 @@ public class DashboardPage extends BasePage {
     private static final By DASHBOARD_LINK = By.id("navigation-dashboard");
     private static final By TEST_CASES_TAB = By.xpath("//a[@id = 'navigation-suites' and contains(text(), 'Test Cases')]");
 
-    public DashboardPage(WebDriver driver) {
+    public DashboardPage(WebDriver driver)
+    {
         super(driver);
     }
 
     @Override
-    public void isPageOpened() {
+    public void isPageOpened()
+    {
         wait.until(ExpectedConditions.elementToBeClickable(new Button(driver, ADD_PROJECT_LINK)));
     }
 
-    public boolean isUserNameDisplayed() {
+    public boolean isUserNameDisplayed()
+    {
         return driver.findElement(NAVIGATION_USERNAME).isDisplayed();
     }
 
     @Step("Click 'Add Project' link")
-    public void clickAddProjectLink() {
+    public void clickAddProjectLink()
+    {
         new Button(driver, ADD_PROJECT_LINK).click();
     }
 
@@ -38,12 +43,14 @@ public class DashboardPage extends BasePage {
     }
 
     @Step("Click 'Dashboard' link")
-    public void clickDashboardLink() {
+    public void clickDashboardLink()
+    {
         new Button(driver, DASHBOARD_LINK).click();
     }
 
     @Step("Open {projectName} project")
-    public void openProject(String projectName) {
-        driver.findElement(By.xpath(String.format(PROJECT_CONTAINER, projectName))).click();
+    public void openProject(String projectName)
+    {
+        new ElementDecorator(driver, (By.xpath(String.format(PROJECT_CONTAINER, projectName)))).click();
     }
 }

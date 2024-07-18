@@ -11,6 +11,7 @@ public class TestDataGeneration {
     static Faker faker = new Faker();
 
     public static Project generateProject() {
+  
         return Project.builder()
                 .setName(faker.country().name() + faker.number().randomDigit())
                 .setShowAnnouncement(true)
@@ -20,7 +21,8 @@ public class TestDataGeneration {
                 .build();
     }
 
-    public static Project generateProjectWithoutName() {
+    public static Project generateProjectWithoutName()
+    {
         return Project.builder()
                 .setName("")
                 .setShowAnnouncement(true)
@@ -30,7 +32,8 @@ public class TestDataGeneration {
                 .build();
     }
 
-    public static Project generateUpdateProject() {
+    public static Project generateUpdateProject()
+    {
         return Project.builder()
                 .setName(faker.funnyName().name())
                 .setShowAnnouncement(true)
@@ -40,6 +43,7 @@ public class TestDataGeneration {
 
 
     public static TestCase generateTestCase() {
+
         return TestCase.builder()
                 .setTitle(faker.animal().name() + faker.number().randomDigit())
                 .setTemplate(Template.TEST_CASE_TEXT)
@@ -51,7 +55,8 @@ public class TestDataGeneration {
                 .build();
     }
 
-    public static TestCase generateTestCaseSteps() {
+    public static TestCase generateTestCaseSteps()
+    {
         return TestCase.builder()
                 .setTitle(faker.animal().name() + faker.number().randomDigit())
                 .setTemplate(Template.TEST_CASE_STEPS)
@@ -63,6 +68,7 @@ public class TestDataGeneration {
                 .setStepsExpectedResult("Expected result_1")
                 .build();
     }
+
 
     public static TestCase generateEditTestCaseSteps() {
         return TestCase.builder()
@@ -77,7 +83,20 @@ public class TestDataGeneration {
                 .build();
     }
 
-    public static Milestone generateMilestone() {
+    public static Milestone generateUpdateMilestone()
+    {
+        return Milestone.builder()
+                .setName(faker.color().name() + faker.number().randomDigit())
+                .setReferences("New References")
+                .setDescription("New Description")
+                .setStartDate("10/16/2024")
+                .setEndDate("10/30/2024")
+                .setMilestoneIsCompleted(true)
+                .build();
+    }
+
+    public static Milestone generateMilestone()
+    {
         return Milestone.builder()
                 .setName(faker.color().name() + faker.number().randomDigit())
                 .setReferences("References")
@@ -88,12 +107,14 @@ public class TestDataGeneration {
                 .build();
     }
 
-    public static Section generateSection() {
+    public static Section generateSection()
+    {
         return Section.builder()
                 .setName("Section" + faker.number().randomDigit())
                 .setDescription("Description for section")
                 .build();
     }
+
 
     public static Section generateEditSection() {
         return Section.builder()
@@ -112,4 +133,26 @@ public class TestDataGeneration {
                 .setExpectedResult("New Expected result")
                 .build();
     }
+    public static TestCase generateInvalidEstimateTestCase()
+    {
+        return TestCase.builder()
+                .setTitle(faker.animal().name() + faker.number().randomDigit())
+                .setTemplate(Template.TEST_CASE_TEXT)
+                .setType(TestCaseType.COMPATIBILITY)
+                .setPriority(TestCasePriority.CRITICAL)
+                .setStatus(TestCaseStatus.DESIGN)
+                .setEstimateInput("twenty")
+                .setPreconditions("Preconditions")
+                .setSteps("Steps").setExpectedResult("Expected result")
+                .build();
+    }
+
+    public static Project generateInvalidReferenciesProject()
+    {
+        return Project.builder()
+                .setName(faker.country().name() + faker.number().randomDigit())
+                .setReferences("References")
+                .build();
+    }
+
 }
