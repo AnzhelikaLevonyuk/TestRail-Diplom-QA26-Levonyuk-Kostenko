@@ -97,15 +97,9 @@ public abstract class BaseTest {
         dashboardPage.isPageOpened();
 
     }
-
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
         driver.quit();
-    }
-
-    @AfterMethod()
-    public void deleteProject() {
-
     }
 
 }

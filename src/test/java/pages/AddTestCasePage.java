@@ -106,8 +106,8 @@ public class AddTestCasePage extends BaseDashboardPage {
         new Button(driver, CREATE_TEST_CASE_BUTTON).click();
     }
 
-    @Step("Get Expected Error Message")
-    public String getExpectedErrorMessage()
+    @Step("Get Error Message")
+    public String getErrorMessage()
     {
         return driver.findElement(By.xpath(ERROR_ESTIMATE_MESSAGE)).getText();
     }

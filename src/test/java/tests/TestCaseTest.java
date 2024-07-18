@@ -76,7 +76,7 @@ public class TestCaseTest extends BaseTest {
     }
 
     @Test(groups = {"smoke", "userShouldBeLogin", "ProjectShouldBeCreated"}, description = "Complete test for TestCase")
-    public void TestCaseCompleteTest() {
+    public void testCaseCompleteTest() {
 
          testCase = TestDataGeneration.generateTestCase();
         TestCase editedTestCase = TestDataGeneration.generateEditTestCaseSteps();
@@ -148,7 +148,7 @@ public class TestCaseTest extends BaseTest {
         addTestCasePage.createTestCase(invalidTestCase);
         addTestCasePage.clickCreateTestCaseButton();
 
-        Assert.assertEquals(addTestCasePage.getExpectedErrorMessage(), "Field Estimate is not in a valid time span format.");
+        Assert.assertEquals(addTestCasePage.getErrorMessage(), "Field Estimate is not in a valid time span format.");
     }
 
 }

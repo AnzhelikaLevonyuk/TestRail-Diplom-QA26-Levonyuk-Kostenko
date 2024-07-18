@@ -31,7 +31,7 @@ public class SectionTest extends BaseTest {
     }
 
     @Test(groups = {"smoke", "userShouldBeLogin", "ProjectShouldBeCreated"}, description = "Complete test for Section")
-    public void SectionCompleteTest() {
+    public void sectionCompleteTest() {
 
         Section section = TestDataGeneration.generateSection();
         Section editedSection = TestDataGeneration.generateEditSection();

@@ -18,9 +18,8 @@ public class TestCasesPage extends BaseDashboardPage {
     private static final String ATTACHMENT = "//div[contains(@title, '%s')]";
     private static final By TEST_CASES_LIST = By.xpath("//span[@data-testid = 'sectionCaseTitle']");
     private static final By SECTION_LIST = By.cssSelector(".groupTreeContainer a span");
-
-    private static final String EDIT_BUTTON = "//span[text() = '%s']/../a[1]";
-    private static final String DELETE_BUTTON = "//span[text() = '%s']/../a[2]";
+    private static final String EDIT_BUTTON = "//span[text() = '%s']/..//div[contains(@class, 'icon-small-edit')]/..";
+    private static final String DELETE_BUTTON = "//span[text() = '%s']/..//div[contains(@class, 'icon-small-delete')]/..";
     private static final String SECTION = "//div[@class= 'grid-title']//span[text() = '%s']";
     private static final By NO_TEST_CASE_TEXT = By.id("groupsEmpty");
     private static final String TEST_CASE_SECTION = "//span[text()='%s']/ancestor::tr";
@@ -84,10 +83,10 @@ public class TestCasesPage extends BaseDashboardPage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(NO_TEST_CASE_TEXT));
     }
 
-    @Step("Check {milestoneName} milestone in the list on Milestones page")
+    @Step("Check test case in the list on TestCases page")
     public boolean isTestCaseCreated(String testCaseName) {
         List<WebElement> testCases = driver.findElements(TEST_CASES_LIST);
-        return testCases.stream().anyMatch(milestone -> milestone.getText().equals(testCaseName));
+        return testCases.stream().anyMatch(testCase -> testCase.getText().equals(testCaseName));
 
     }
 
