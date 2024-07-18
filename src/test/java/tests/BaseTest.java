@@ -43,6 +43,7 @@ public abstract class BaseTest {
     @Parameters("browserName")
     public void setUp(@Optional("chrome") String browser, ITestContext testContext) throws Exception {
         driver = DriverFactory.getDriver(browser);
+
         testContext.setAttribute("driver", driver);
 
         loginPage = new LoginPage(driver);
