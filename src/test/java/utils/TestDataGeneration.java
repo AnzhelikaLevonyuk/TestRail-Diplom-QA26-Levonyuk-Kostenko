@@ -101,7 +101,7 @@ public class TestDataGeneration {
                 .setName(faker.color().name() + faker.number().randomDigit())
                 .setReferences("References")
                 .setDescription("Description")
-                .setStartDate("6/16/2024")
+                .setStartDate("6/18/2024")
                 .setEndDate("6/30/2024")
                 .setMilestoneIsCompleted(true)
                 .build();

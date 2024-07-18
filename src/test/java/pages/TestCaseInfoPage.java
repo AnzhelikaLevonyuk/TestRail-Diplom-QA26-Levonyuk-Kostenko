@@ -24,8 +24,6 @@ public class TestCaseInfoPage extends BaseDashboardPage {
     private static final By STEPS_DESCRIPTION = By.xpath("//div[@class= 'hidden-vertical']/div/p");
     private static final By EDIT_BUTTON_TEST_CASE = By.cssSelector("[data-testid ='testCaseEditButton']");
 
-    private static final By EDIT_BUTTON_TEST_CASE = By.cssSelector("[data-testid ='testCaseEditButton']");
-
 
     public TestCaseInfoPage(WebDriver driver) {
         super(driver);

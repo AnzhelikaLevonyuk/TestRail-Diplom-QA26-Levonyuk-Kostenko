@@ -90,4 +90,10 @@ public class TestCasesPage extends BaseDashboardPage {
         return testCases.stream().anyMatch(milestone -> milestone.getText().equals(testCaseName));
 
     }
+
+    @Step("Click TestCase Link by name = '{testCaseName}'")
+    public void clickTestCaseLinkByName(String testCaseTitle)
+    {
+        driver.findElement(By.xpath(String.format(TEST_CASE_TITLE, testCaseTitle))).click();
+    }
 }

@@ -17,7 +17,7 @@ public class EndToEndScenarioTest extends BaseTest {
         Project updatedProject = TestDataGeneration.generateUpdateProject();
         milestone = TestDataGeneration.generateMilestone();
         testCase = TestDataGeneration.generateTestCase();
-        File uploadFile = new File(PropertyReader.getProperty("filename"));
+        File uploadFile = new File(PropertyReader.getProperty("filepath"));
         section = TestDataGeneration.generateSection();
 
         dashboardPage.isPageOpened();

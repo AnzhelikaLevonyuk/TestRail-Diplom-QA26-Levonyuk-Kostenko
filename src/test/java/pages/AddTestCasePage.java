@@ -106,27 +106,6 @@ public class AddTestCasePage extends BaseDashboardPage {
         new Button(driver, CREATE_TEST_CASE_BUTTON).click();
     }
 
-    @Step("Editing test Case")
-    public void editTestCase(TestCase testCase)
-    {
-        new Input(driver, TITLE).clearValue();
-        new Input(driver, TITLE).setValue(testCase.getTitle());
-        if (testCase.getType() != null) {
-            new DropDown(driver, driver.findElement(TYPE)).selectByVisibleText(testCase.getType().getName());
-        }
-        if (testCase.getPriority() != null) {
-            new DropDown(driver, driver.findElement(PRIORITY)).selectByVisibleText(testCase.getPriority().getName());
-        }
-        if (testCase.getStatus() != null) {
-            new DropDown(driver, driver.findElement(STATUS)).selectByVisibleText(testCase.getStatus().getName());
-        }
-        new TextArea(driver, driver.findElement(PRECONDITION)).clearValue();
-        new TextArea(driver, driver.findElement(PRECONDITION)).setValue(testCase.getPreconditions());
-        new TextArea(driver, driver.findElement(STEPS)).clearValue();
-        new TextArea(driver, driver.findElement(STEPS)).setValue(testCase.getSteps());
-        new TextArea(driver, driver.findElement(EXPECTED_RESULT)).clearValue();
-        new TextArea(driver, driver.findElement(EXPECTED_RESULT)).setValue(testCase.getExpectedResult());
-    }
     @Step("Get Expected Error Message")
     public String getExpectedErrorMessage()
     {

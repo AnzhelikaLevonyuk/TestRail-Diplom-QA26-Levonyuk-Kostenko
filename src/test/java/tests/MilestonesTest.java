@@ -7,6 +7,20 @@ import org.testng.annotations.Test;
 import utils.TestDataGeneration;
 
 public class MilestonesTest extends BaseTest {
+    @BeforeMethod(onlyForGroups = "createMilestone", alwaysRun = true)
+    public void beforeCreateMilestone()
+    {
+        milestone = TestDataGeneration.generateMilestone();
+        dashboardPage.isPageOpened();
+        dashboardPage.openProject(project.getName());
+        projectsPage.clickMilestonesTab();
+        milestonesPage.isPageOpened();
+        milestonesPage.clickAddMilestoneButton();
+        addMilestonePage.isPageOpened();
+        addMilestonePage.createMilestone(milestone);
+        addMilestonePage.clickCreateMilestoneButton();
+        milestonesPage.returnToDashboardTab();
+    }
 
 
     @Test(groups = {"smoke", "userShouldBeLogin", "ProjectShouldBeCreated"}, description = "Creating new milestone")
@@ -46,24 +60,8 @@ public class MilestonesTest extends BaseTest {
         Assert.assertEquals(addMilestonePage.getErrorMessage(), "Field Name is a required field.");
     }
 
-    @BeforeMethod(onlyForGroups = "createMilestone", alwaysRun = true)
-    public void beforeCreateMilestone()
-    {
-        milestone = TestDataGeneration.generateMilestone();
-        dashboardPage.isPageOpened();
-        dashboardPage.openProject(project.getName());
-        projectsPage.clickMilestonesTab();
-        milestonesPage.isPageOpened();
-        milestonesPage.clickAddMilestoneButton();
-        addMilestonePage.isPageOpened();
-        addMilestonePage.createMilestone(milestone);
-        addMilestonePage.clickCreateMilestoneButton();
-        milestonesPage.returnToDashboardTab();
-    }
-
     @Test(groups = {"smoke", "userShouldBeLogin", "ProjectShouldBeCreated", "createMilestone"}, description = "Delete milestone {milestoneName}")
-    public void deleteMilestone()
-    {
+    public void deleteMilestone() {
         dashboardPage.isPageOpened();
         dashboardPage.openProject(project.getName());
         overviewProjectPage.isPageOpened();

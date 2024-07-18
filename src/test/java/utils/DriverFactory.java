@@ -15,7 +15,7 @@ public class DriverFactory {
             case "chrome" -> {
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--headless");
-                driver = new ChromeDriver(options);
+                driver = new ChromeDriver();
             }
             case "safari" -> driver = new SafariDriver();
             case "firefox" -> driver = new FirefoxDriver();
