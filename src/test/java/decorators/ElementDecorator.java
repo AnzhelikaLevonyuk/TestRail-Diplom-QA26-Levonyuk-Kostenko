@@ -138,4 +138,11 @@ public class ElementDecorator implements WebElement {
     public <X> X getScreenshotAs(OutputType<X> target) throws WebDriverException {
         return element.getScreenshotAs(target);
     }
+    public void clearAndSetValue(CharSequence... keysToSend)
+    {
+        element.clear();
+        log.debug("Setting value = {} into element with data-testid = {}", keysToSend, this.dataTestId);
+        element.sendKeys(keysToSend);
+
+    }
 }

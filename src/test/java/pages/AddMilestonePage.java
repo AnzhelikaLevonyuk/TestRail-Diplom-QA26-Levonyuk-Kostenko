@@ -21,17 +21,20 @@ public class AddMilestonePage extends BaseDashboardPage {
 
     private static final By ERROR_MESSAGE = By.cssSelector("div + .message-error");
 
-    public AddMilestonePage(WebDriver driver) {
+    public AddMilestonePage(WebDriver driver)
+    {
         super(driver);
     }
 
     @Override
-    public void isPageOpened() {
+    public void isPageOpened()
+    {
         wait.until(ExpectedConditions.visibilityOf(new Button(driver, MILESTONE_CREATE_BUTTON)));
     }
 
     @Step("Create new milestone")
-    public void createMilestone(Milestone milestone) {
+    public void createMilestone(Milestone milestone)
+    {
         new Input(driver, MILESTONE_NAME).setValue(milestone.getName());
         new Input(driver, MILESTONE_REFERENCE).setValue(milestone.getReferences());
         new TextArea(driver, MILESTONE_DESCRIPTION).setValue(milestone.getDescription());
@@ -41,17 +44,36 @@ public class AddMilestonePage extends BaseDashboardPage {
     }
 
     @Step("Create new milestone without name: Fill reference:{reference}")
-    public void createMilestoneWithoutName(Milestone milestone) {
+    public void createMilestoneWithoutName(Milestone milestone)
+    {
         new Input(driver, MILESTONE_NAME).setValue(milestone.getName());
         new CheckBox(driver, MILESTONE_CHECK_BOX).check();
     }
 
     @Step("Click 'Create milestone' button")
-    public void clickCreateMilestoneButton() {
+    public void clickCreateMilestoneButton()
+    {
         new Button(driver, MILESTONE_CREATE_BUTTON).click();
     }
 
-    public String getErrorMessage() {
+    public String getErrorMessage()
+    {
         return driver.findElement(ERROR_MESSAGE).getText();
+    }
+
+    @Step("Edit milestone")
+    public void editMilestone(Milestone milestone)
+    {
+        new Input(driver, MILESTONE_NAME).clearAndSetValue(milestone.getName());
+
+        new Input(driver, MILESTONE_REFERENCE).clearAndSetValue(milestone.getReferences());
+
+        new TextArea(driver, MILESTONE_DESCRIPTION).clearAndSetValue(milestone.getDescription());
+
+        new Input(driver, MILESTONE_START_DATE).clearAndSetValue(milestone.getStartDate());
+
+        new Input(driver, MILESTONE_END_DATE).clearAndSetValue(milestone.getEndDate());
+
+        new CheckBox(driver, MILESTONE_CHECK_BOX).check();
     }
 }

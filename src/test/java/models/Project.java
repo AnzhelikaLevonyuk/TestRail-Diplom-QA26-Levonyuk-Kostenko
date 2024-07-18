@@ -11,10 +11,13 @@ import lombok.EqualsAndHashCode;
 public class Project {
     private String name;
     private String announcement;
+
     @EqualsAndHashCode.Exclude
     private boolean showAnnouncement;
     @EqualsAndHashCode.Exclude
     private ProjectType projectType;
     @EqualsAndHashCode.Exclude
     private boolean enableTestCaseApprovals;
+    @EqualsAndHashCode.Exclude
+    private String references;
 }

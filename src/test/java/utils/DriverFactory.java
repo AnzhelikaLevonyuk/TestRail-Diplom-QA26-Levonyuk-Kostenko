@@ -15,7 +15,8 @@ public class DriverFactory {
             case "chrome" -> {
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--headless");
-                driver = new ChromeDriver();
+                options.addArguments("--window-size=1920x1080");
+                driver = new ChromeDriver(options);
             }
             case "safari" -> driver = new SafariDriver();
             case "firefox" -> driver = new FirefoxDriver();

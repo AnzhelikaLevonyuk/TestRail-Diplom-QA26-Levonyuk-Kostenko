@@ -1,6 +1,7 @@
 package tests;
 
 import modals.ConfirmationModal;
+import modals.ConfirmationModalForTestCase;
 import models.Milestone;
 import models.Project;
 import models.Section;
@@ -27,8 +28,11 @@ public abstract class BaseTest {
     protected AddTestCasePage addTestCasePage;
     protected TestCaseInfoPage testCaseInfoPage;
     protected ConfirmationModal confirmationModal;
+    protected ConfirmationModalForTestCase confirmationModalForTestCase;
     protected OverviewProjectPage overviewProjectPage;
     protected MilestoneInfoPage milestoneInfoPage;
+    protected AddSectionPage addSectionPage;
+
     protected Project project;
     protected Milestone milestone;
     protected TestCase testCase;
@@ -39,6 +43,7 @@ public abstract class BaseTest {
     @Parameters("browserName")
     public void setUp(@Optional("chrome") String browser, ITestContext testContext) throws Exception {
         driver = DriverFactory.getDriver(browser);
+
         testContext.setAttribute("driver", driver);
 
         loginPage = new LoginPage(driver);
@@ -51,9 +56,10 @@ public abstract class BaseTest {
         addTestCasePage = new AddTestCasePage(driver);
         testCaseInfoPage = new TestCaseInfoPage(driver);
         confirmationModal = new ConfirmationModal(driver);
+        confirmationModalForTestCase = new ConfirmationModalForTestCase(driver);
         overviewProjectPage = new OverviewProjectPage(driver);
         milestoneInfoPage = new MilestoneInfoPage(driver);
-
+        addSectionPage = new AddSectionPage(driver);
 
         loginPage.open();
     }
@@ -67,7 +73,6 @@ public abstract class BaseTest {
     @BeforeMethod(dependsOnMethods = {"setUp", "userShouldBeLogIn"}, onlyForGroups = "ProjectShouldBeCreated", alwaysRun = true)
     public void beforeCreateProject() {
         project = TestDataGeneration.generateProject();
-
         dashboardPage.isPageOpened();
         dashboardPage.clickAddProjectLink();
         addProjectPage.isPageOpened();
@@ -75,9 +80,26 @@ public abstract class BaseTest {
         projectsPage.returnToDashboardTab();
         dashboardPage.isPageOpened();
     }
+    @BeforeMethod(dependsOnMethods = "beforeCreateProject", onlyForGroups = "TestCaseShouldBeCreated", alwaysRun = true)
+    public void beforeCreateTestCase()
+    {
+        testCase = TestDataGeneration.generateTestCase();
 
+        dashboardPage.openProject(project.getName());
+        overviewProjectPage.isPageOpened();
+        overviewProjectPage.clickTestCasesTab();
+        testCasesPage.isPageOpened();
+        testCasesPage.clickAddTestCaseButton();
+        addTestCasePage.isPageOpened();
+        addTestCasePage.createTestCase(testCase);
+        addTestCasePage.clickCreateTestCaseButton();
+        testCaseInfoPage.returnToDashboardTab();
+        dashboardPage.isPageOpened();
+
+    }
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
         driver.quit();
     }
+
 }

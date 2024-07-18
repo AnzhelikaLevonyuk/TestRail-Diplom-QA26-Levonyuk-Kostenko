@@ -12,32 +12,50 @@ import java.util.List;
 public class MilestonesPage extends BaseDashboardPage {
     private static final By MILESTONE_LIST = By.cssSelector(".hoverSensitive");
     private static final String ADD_MILESTONE = "navigationMilestonesAdd";
-    private static final String DELETE_MILESTONE_CONTAINER = "//td/a[text()='%s']//ancestor::div[@id=\"completed\"]//a[@class = \"deleteLink\"]";
-    private static final String MILESTONES_CONTAINER = "//td/a[text() = '%s']";
 
-    public MilestonesPage(WebDriver driver) {
+    private static final String DELETE_MILESTONE_CONTAINER = "//td/a[text()='%s']//ancestor::div[@id='completed']//a[@class = 'deleteLink']";
+
+    private static final String MILESTONES_CONTAINER = "//a[starts-with(@href, 'index.php?/milestones/view') and text()='%s']";
+
+
+    public MilestonesPage(WebDriver driver)
+    {
         super(driver);
     }
 
     @Step("Click 'Add milestone' button")
-    public void clickAddMilestoneButton() {
+    public void clickAddMilestoneButton()
+    {
         new Button(driver, ADD_MILESTONE).click();
     }
 
     @Step("Click Delete button near {milestoneName}")
-    public void clickDeleteMilestone(String milestoneName) {
+    public void clickDeleteMilestone(String milestoneName)
+    {
         driver.findElement(By.xpath(String.format(DELETE_MILESTONE_CONTAINER, milestoneName))).click();
     }
 
     @Step("Check {milestoneName} milestone in the list on Milestones page")
-    public boolean isMilestoneCreated(String milestoneName) {
+    public boolean isMilestoneCreated(String milestoneName)
+    {
         List<WebElement> milestones = driver.findElements(MILESTONE_LIST);
         return milestones.stream().anyMatch(milestone -> milestone.getText().equals(milestoneName));
     }
 
     @Step("Open Milestone info page")
-    public void openInfoPage(String milestoneName) {
+    public void openInfoPage(String milestoneName)
+    {
         driver.findElement(By.xpath(String.format(MILESTONES_CONTAINER, milestoneName))).click();
     }
 
+    public boolean isMilestoneDisplayed(String milestoneName)
+    {
+        return driver.findElement(By.xpath(String.format(MILESTONES_CONTAINER, milestoneName))).isDisplayed();
+    }
+
+    @Step("Click Milestone Link by name = '{milestoneName}'")
+    public void clickMilestoneLinkByName(String milestoneName)
+    {
+        driver.findElement(By.xpath(String.format(MILESTONES_CONTAINER, milestoneName))).click();
+    }
 }

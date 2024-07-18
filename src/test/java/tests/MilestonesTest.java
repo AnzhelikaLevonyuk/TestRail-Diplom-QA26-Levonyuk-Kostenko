@@ -7,13 +7,26 @@ import org.testng.annotations.Test;
 import utils.TestDataGeneration;
 
 public class MilestonesTest extends BaseTest {
+    @BeforeMethod(onlyForGroups = "createMilestone", alwaysRun = true)
+    public void beforeCreateMilestone()
+    {
+        milestone = TestDataGeneration.generateMilestone();
+        dashboardPage.isPageOpened();
+        dashboardPage.openProject(project.getName());
+        projectsPage.clickMilestonesTab();
+        milestonesPage.isPageOpened();
+        milestonesPage.clickAddMilestoneButton();
+        addMilestonePage.isPageOpened();
+        addMilestonePage.createMilestone(milestone);
+        addMilestonePage.clickCreateMilestoneButton();
+        milestonesPage.returnToDashboardTab();
+    }
 
 
     @Test(groups = {"smoke", "userShouldBeLogin", "ProjectShouldBeCreated"}, description = "Creating new milestone")
-    public void createMilestone() {
-
+    public void createMilestone()
+    {
         milestone = TestDataGeneration.generateMilestone();
-
         dashboardPage.isPageOpened();
         dashboardPage.openProject(project.getName());
         projectsPage.isPageOpened();
@@ -24,18 +37,17 @@ public class MilestonesTest extends BaseTest {
         addMilestonePage.createMilestone(milestone);
         addMilestonePage.clickCreateMilestoneButton();
         Assert.assertEquals(milestonesPage.getSuccessMessage(), "Successfully added the new milestone.");
-
         milestonesPage.openInfoPage(milestone.getName());
         Milestone actualMilestone = milestoneInfoPage.getMilestoneInfo();
         Assert.assertEquals(actualMilestone, milestone);
     }
 
     @Test(groups = {"regression", "userShouldBeLogin", "ProjectShouldBeCreated"}, description = "Creating new milestone without name")
-    public void createMilestoneWithoutName() {
+    public void createMilestoneWithoutName()
+    {
         milestone = Milestone.builder()
                 .setName("").setMilestoneIsCompleted(true)
                 .build();
-
         dashboardPage.isPageOpened();
         dashboardPage.openProject(project.getName());
         overviewProjectPage.isPageOpened();
@@ -48,22 +60,6 @@ public class MilestonesTest extends BaseTest {
         Assert.assertEquals(addMilestonePage.getErrorMessage(), "Field Name is a required field.");
     }
 
-    @BeforeMethod(onlyForGroups = "createMilestone", alwaysRun = true)
-    public void beforeCreateMilestone() {
-
-        milestone = TestDataGeneration.generateMilestone();
-
-        dashboardPage.isPageOpened();
-        dashboardPage.openProject(project.getName());
-        projectsPage.clickMilestonesTab();
-        milestonesPage.isPageOpened();
-        milestonesPage.clickAddMilestoneButton();
-        addMilestonePage.isPageOpened();
-        addMilestonePage.createMilestone(milestone);
-        addMilestonePage.clickCreateMilestoneButton();
-        milestonesPage.returnToDashboardTab();
-    }
-
     @Test(groups = {"smoke", "userShouldBeLogin", "ProjectShouldBeCreated", "createMilestone"}, description = "Delete milestone {milestoneName}")
     public void deleteMilestone() {
         dashboardPage.isPageOpened();
@@ -74,8 +70,65 @@ public class MilestonesTest extends BaseTest {
         milestonesPage.clickDeleteMilestone(milestone.getName());
         confirmationModal.waitConfirmationDialogToDisplayed();
         confirmationModal.clickDeleteButton();
-
         Assert.assertEquals(milestonesPage.getSuccessMessage(), "Successfully deleted the milestone (s).");
     }
 
+    @Test(groups = {"smoke", "userShouldBeLogin", "ProjectShouldBeCreated", "createMilestone"}, description = "Edit milestone {milestoneName}")
+    public void editMilestone()
+    {
+        Milestone updatedMilestone = TestDataGeneration.generateUpdateMilestone();
+        dashboardPage.isPageOpened();
+        dashboardPage.openProject(project.getName());
+        overviewProjectPage.isPageOpened();
+        overviewProjectPage.clickMilestonesTab();
+        milestonesPage.isPageOpened();
+        milestonesPage.clickMilestoneLinkByName(milestone.getName());
+        milestoneInfoPage.clickEditMilestoneButton();
+        addMilestonePage.isPageOpened();
+        addMilestonePage.editMilestone(updatedMilestone);
+        addMilestonePage.clickCreateMilestoneButton();
+        Assert.assertEquals(milestonesPage.getSuccessMessage(), "Successfully updated the milestone.");
+    }
+
+    @Test(groups = {"smoke", "userShouldBeLogin", "ProjectShouldBeCreated", "createMilestone"}, description = "Delete milestone {milestoneName}")
+    public void cancelDeletingMilestone()
+    {
+        dashboardPage.isPageOpened();
+        dashboardPage.openProject(project.getName());
+        overviewProjectPage.isPageOpened();
+        overviewProjectPage.clickMilestonesTab();
+        milestonesPage.isPageOpened();
+        milestonesPage.clickDeleteMilestone(milestone.getName());
+        confirmationModal.waitConfirmationDialogToDisplayed();
+        confirmationModal.clickCancelButton();
+        Assert.assertTrue(milestonesPage.isMilestoneDisplayed(milestone.getName()));
+    }
+
+    @Test(groups = {"smoke", "userShouldBeLogin", "ProjectShouldBeCreated"}, description = "Creating new milestone")
+    public void milestoneCompleteTest()
+    {
+        milestone = TestDataGeneration.generateMilestone();
+        Milestone updatedMilestone = TestDataGeneration.generateUpdateMilestone();
+        dashboardPage.isPageOpened();
+        dashboardPage.openProject(project.getName());
+        projectsPage.isPageOpened();
+        projectsPage.clickMilestonesTab();
+        milestonesPage.isPageOpened();
+        milestonesPage.clickAddMilestoneButton();
+        addMilestonePage.isPageOpened();
+        addMilestonePage.createMilestone(milestone);
+        addMilestonePage.clickCreateMilestoneButton();
+        milestoneInfoPage.isPageOpened();
+        milestoneInfoPage.returnToDashboardTab();
+        dashboardPage.openProject(project.getName());
+        overviewProjectPage.isPageOpened();
+        overviewProjectPage.clickMilestonesTab();
+        milestonesPage.isPageOpened();
+        milestonesPage.clickMilestoneLinkByName(milestone.getName());
+        milestoneInfoPage.clickEditMilestoneButton();
+        addMilestonePage.isPageOpened();
+        addMilestonePage.editMilestone(updatedMilestone);
+        addMilestonePage.clickCreateMilestoneButton();
+        Assert.assertEquals(milestonesPage.getSuccessMessage(), "Successfully updated the milestone.");
+    }
 }

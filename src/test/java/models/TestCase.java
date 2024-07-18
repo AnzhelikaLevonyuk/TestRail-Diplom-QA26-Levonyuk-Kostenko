@@ -23,5 +23,6 @@ public class TestCase {
     private String expectedResult;
     private String stepDescription;
     private String stepsExpectedResult;
+    private String estimateInput;
 
 }
