@@ -64,16 +64,16 @@ public class AddMilestonePage extends BaseDashboardPage {
     @Step("Edit milestone")
     public void editMilestone(Milestone milestone)
     {
-        new Input(driver, MILESTONE_NAME).clearValue();
-        new Input(driver, MILESTONE_NAME).setValue(milestone.getName());
-        new Input(driver, MILESTONE_REFERENCE).clearValue();
-        new Input(driver, MILESTONE_REFERENCE).setValue(milestone.getReferences());
-        new TextArea(driver, MILESTONE_DESCRIPTION).clearValue();
-        new TextArea(driver, MILESTONE_DESCRIPTION).setValue(milestone.getDescription());
-        new Input(driver, MILESTONE_START_DATE).clearValue();
-        new Input(driver, MILESTONE_START_DATE).setValue(milestone.getStartDate());
-        new Input(driver, MILESTONE_END_DATE).clearValue();
-        new Input(driver, MILESTONE_END_DATE).setValue(milestone.getEndDate());
+        new Input(driver, MILESTONE_NAME).clearAndSetValue(milestone.getName());
+
+        new Input(driver, MILESTONE_REFERENCE).clearAndSetValue(milestone.getReferences());
+
+        new TextArea(driver, MILESTONE_DESCRIPTION).clearAndSetValue(milestone.getDescription());
+
+        new Input(driver, MILESTONE_START_DATE).clearAndSetValue(milestone.getStartDate());
+
+        new Input(driver, MILESTONE_END_DATE).clearAndSetValue(milestone.getEndDate());
+
         new CheckBox(driver, MILESTONE_CHECK_BOX).check();
     }
 }

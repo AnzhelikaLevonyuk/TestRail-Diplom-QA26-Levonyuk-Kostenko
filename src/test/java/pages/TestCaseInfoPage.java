@@ -17,8 +17,8 @@ public class TestCaseInfoPage extends BaseDashboardPage {
     private static final By TYPE = By.cssSelector("td[data-testid ='testCaseViewCellTypeId']");
     private static final By PRIORITY = By.cssSelector("td[data-testid='testCaseViewCellPriorityId']");
     private static final By STATUS = By.id("cell_status");
-    private static final By PRECONDITIONS = By.xpath("//span[text() = 'Preconditions']/../following-sibling::div[@class='field-content'][1]//p");
-    private static final By STEPS = By.xpath("//span[text() = 'Steps']/../following-sibling::div[@class='field-content'][1]//p");
+    private static final By PRECONDITIONS = By.xpath("//*[text()='Preconditions']//following::p");
+    private static final By STEPS = By.xpath("//*[text()='Steps']//following::p");
     private static final By EXPECTED_RESULT = By.xpath("//span[text() = 'Expected Result']/../following-sibling::div[@class='field-content']//p");
     private static final By STEPS_EXPECTED_RESULT = By.cssSelector(".step-content + .hidden-vertical  div p");
     private static final By STEPS_DESCRIPTION = By.xpath("//div[@class= 'hidden-vertical']/div/p");

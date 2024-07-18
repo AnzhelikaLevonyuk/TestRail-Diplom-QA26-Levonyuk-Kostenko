@@ -31,8 +31,7 @@ public class AddSectionPage extends BaseDashboardPage {
 
     @Step("Editing new Section")
     public void editSection(Section section) {
-        new Input(driver, SECTION_NAME).clearValue();
-        new Input(driver, SECTION_NAME).setValue(section.getName());
+        new Input(driver, SECTION_NAME).clearAndSetValue(section.getName());
 
     }
 }

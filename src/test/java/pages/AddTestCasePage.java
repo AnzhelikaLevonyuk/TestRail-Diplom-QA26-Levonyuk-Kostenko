@@ -70,8 +70,8 @@ public class AddTestCasePage extends BaseDashboardPage {
 
     @Step("Editing test Case")
     public void editTestCase(TestCase testCase) {
-        new Input(driver, TITLE).clearValue();
-        new Input(driver, TITLE).setValue(testCase.getTitle());
+        new Input(driver, TITLE).clearAndSetValue(testCase.getTitle());
+
         if (testCase.getType() != null) {
             new DropDown(driver, driver.findElement(TYPE)).selectByVisibleText(testCase.getType().getName());
         }
@@ -81,18 +81,18 @@ public class AddTestCasePage extends BaseDashboardPage {
         if (testCase.getStatus() != null) {
             new DropDown(driver, driver.findElement(STATUS)).selectByVisibleText(testCase.getStatus().getName());
         }
-        new TextArea(driver, driver.findElement(PRECONDITION)).clearValue();
-        new TextArea(driver, driver.findElement(PRECONDITION)).setValue(testCase.getPreconditions());
-        new TextArea(driver, driver.findElement(STEPS)).clearValue();
-        new TextArea(driver, driver.findElement(STEPS)).setValue(testCase.getSteps());
-        new TextArea(driver, driver.findElement(EXPECTED_RESULT)).clearValue();
-        new TextArea(driver, driver.findElement(EXPECTED_RESULT)).setValue(testCase.getExpectedResult());
+        new TextArea(driver, driver.findElement(PRECONDITION)).clearAndSetValue(testCase.getPreconditions());
+
+        new TextArea(driver, driver.findElement(STEPS)).clearAndSetValue(testCase.getSteps());
+
+        new TextArea(driver, driver.findElement(EXPECTED_RESULT)).clearAndSetValue(testCase.getExpectedResult());
+
     }
 
     @Step("Editing test Case")
     public void editTestCaseToTestCaseSteps(TestCase testCase) {
-        new Input(driver, TITLE).clearValue();
-        new Input(driver, TITLE).setValue(testCase.getTitle());
+        new Input(driver, TITLE).clearAndSetValue(testCase.getTitle());
+
         new DropDown(driver, driver.findElement(TEMPLATE)).selectByVisibleText(testCase.getTemplate().getName());
         waiting();
         new Button(driver, ADD_STEP_BUTTON).click();
@@ -112,3 +112,4 @@ public class AddTestCasePage extends BaseDashboardPage {
         return driver.findElement(By.xpath(ERROR_ESTIMATE_MESSAGE)).getText();
     }
 }
+

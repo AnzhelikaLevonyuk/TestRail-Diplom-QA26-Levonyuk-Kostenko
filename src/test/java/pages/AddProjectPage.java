@@ -64,11 +64,11 @@ public class AddProjectPage extends BasePage {
 
     @Step("Editing project")
     public void editProject(Project project) {
-        new Input(driver, PROJECT_NAME).clearValue();
-        new Input(driver, PROJECT_NAME).setValue(project.getName());
+        new Input(driver, PROJECT_NAME).clearAndSetValue(project.getName());
+
         if (project.getAnnouncement() != null) {
-            new TextArea(driver, ANNOUNCEMENT).clearValue();
-            new TextArea(driver, ANNOUNCEMENT).setValue(project.getAnnouncement());
+            new TextArea(driver, ANNOUNCEMENT).clearAndSetValue(project.getAnnouncement());
+
         } else {
             new TextArea(driver, ANNOUNCEMENT).setValue(project.getAnnouncement());
         }
