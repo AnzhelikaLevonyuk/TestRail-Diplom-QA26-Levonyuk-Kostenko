@@ -9,7 +9,7 @@ import java.io.File;
 
 public class ProjectAndTestCaseCreationTest extends BaseTest {
 
-    @Test(groups = {"regression","userShouldBeLogin"}, description = "Full Workflow Test")
+    @Test(groups = {"regression","userShouldBeLogin"}, description = "Creating project with test-cases")
     public void createProjectAndTestCaseWithAttachmentTest()
     {
         project = TestDataGeneration.generateProject();

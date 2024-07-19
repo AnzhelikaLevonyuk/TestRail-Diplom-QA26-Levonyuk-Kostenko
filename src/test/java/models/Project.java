@@ -1,5 +1,6 @@
 package models;
 
+import com.google.gson.annotations.SerializedName;
 import enums.ProjectType;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +14,7 @@ public class Project {
     private String announcement;
 
     @EqualsAndHashCode.Exclude
+    @SerializedName("show_announcement")
     private boolean showAnnouncement;
     @EqualsAndHashCode.Exclude
     private ProjectType projectType;
@@ -20,4 +22,12 @@ public class Project {
     private boolean enableTestCaseApprovals;
     @EqualsAndHashCode.Exclude
     private String references;
+    @EqualsAndHashCode.Exclude
+    @SerializedName("suite_mode")
+    private int suiteMode;
+    @EqualsAndHashCode.Exclude
+    @SerializedName("case_statuses_enabled")
+    private boolean caseStatusesEnabled;
+
+
 }
