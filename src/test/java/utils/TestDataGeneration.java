@@ -11,13 +11,15 @@ public class TestDataGeneration {
     static Faker faker = new Faker();
 
     public static Project generateProject() {
-  
+
         return Project.builder()
                 .setName(faker.country().name() + faker.number().randomDigit())
                 .setShowAnnouncement(true)
                 .setAnnouncement(faker.address().cityName())
                 .setProjectType(ProjectType.SINGLE_REPO_FOR_ALL_CASES)
                 .setEnableTestCaseApprovals(true)
+                .setSuiteMode(1)
+                .setCaseStatusesEnabled(true)
                 .build();
     }
 
@@ -51,7 +53,8 @@ public class TestDataGeneration {
                 .setPriority(TestCasePriority.CRITICAL)
                 .setStatus(TestCaseStatus.DESIGN)
                 .setPreconditions("Preconditions")
-                .setSteps("Steps").setExpectedResult("Expected result")
+                .setSteps("Steps")
+                .setExpectedResult("Expected result")
                 .build();
     }
 
