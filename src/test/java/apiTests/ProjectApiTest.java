@@ -13,14 +13,15 @@ public class ProjectApiTest extends BaseApiTest {
         project = TestDataGeneration.generateProject();
         Response response = projectController.createProject(project);
 
-        Assert.assertEquals(response.getStatusCode(),200);
+        Assert.assertEquals(response.getStatusCode(), 200);
         Project actualProject = response.getBody().as(Project.class, ObjectMapperType.GSON);
-        Assert.assertEquals(actualProject,project);
+        Assert.assertEquals(actualProject, project);
     }
 
     @Test
     public void deleteProject() {
         Response response = projectController.deleteProject(projectId);
-        Assert.assertEquals(response.getStatusCode(),200);
+        Assert.assertEquals(response.getStatusCode(), 200);
     }
+}
 
