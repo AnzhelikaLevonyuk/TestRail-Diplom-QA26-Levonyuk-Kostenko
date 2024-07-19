@@ -70,7 +70,7 @@ public class TestCasesPage extends BaseDashboardPage {
         actions.moveToElement(section).moveToElement(deleteButton).click().build().perform();
     }
 
-    @Step("Deleting Section")
+    @Step("Deleting Test Case")
     public void clickDeleteTestCaseButton(String testCaseName) {
         waiting();
         WebElement testCase = driver.findElement(By.xpath(String.format(TEST_CASE_SECTION, testCaseName)));

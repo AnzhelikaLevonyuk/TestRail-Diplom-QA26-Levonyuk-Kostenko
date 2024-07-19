@@ -53,7 +53,7 @@ public class AddTestCasePage extends BaseDashboardPage {
         new TextArea(driver, driver.findElement(EXPECTED_RESULT)).setValue(testCase.getExpectedResult());
     }
 
-    @Step("Create new test-case")
+    @Step("Create new test-case(steps)")
     public void createTestCaseSteps(TestCase testCase)
     {
         new Input(driver, TITLE).setValue(testCase.getTitle());
@@ -89,7 +89,7 @@ public class AddTestCasePage extends BaseDashboardPage {
 
     }
 
-    @Step("Editing test Case")
+    @Step("Edit test Case(Steps)")
     public void editTestCaseToTestCaseSteps(TestCase testCase) {
         new Input(driver, TITLE).clearAndSetValue(testCase.getTitle());
 
@@ -112,4 +112,3 @@ public class AddTestCasePage extends BaseDashboardPage {
         return driver.findElement(By.xpath(ERROR_ESTIMATE_MESSAGE)).getText();
     }
 }
-
