@@ -33,7 +33,7 @@ public class TestCaseTest extends BaseTest {
 
     }
 
-    @Test(groups = {"smoke", "userShouldBeLogin", "ProjectShouldBeCreated"}, description = "Creating new test case")
+    @Test(groups = {"smoke", "userShouldBeLogin", "ProjectShouldBeCreated"}, description = "Creating new test case(Steps)")
     public void createTestCaseSteps() {
 
         testCase = TestDataGeneration.generateTestCaseSteps();
@@ -78,7 +78,7 @@ public class TestCaseTest extends BaseTest {
     @Test(groups = {"smoke", "userShouldBeLogin", "ProjectShouldBeCreated"}, description = "Complete test for TestCase")
     public void testCaseCompleteTest() {
 
-         testCase = TestDataGeneration.generateTestCase();
+        testCase = TestDataGeneration.generateTestCase();
         TestCase editedTestCase = TestDataGeneration.generateEditTestCaseSteps();
         File uploadFile = new File(PropertyReader.getProperty("filepath"));
 
