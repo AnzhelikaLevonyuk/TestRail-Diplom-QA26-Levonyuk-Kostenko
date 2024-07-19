@@ -157,5 +157,13 @@ public class TestDataGeneration {
                 .setReferences("References")
                 .build();
     }
-
+    public static Milestone generateSimpleMilestone()
+    {
+        return Milestone.builder()
+                .setName(faker.color().name() + faker.number().randomDigit())
+                .setReferences("References")
+                .setDescription("Description")
+                .setMilestoneIsCompleted(true)
+                .build();
+    }
 }

@@ -112,4 +112,3 @@ public class AddTestCasePage extends BaseDashboardPage {
         return driver.findElement(By.xpath(ERROR_ESTIMATE_MESSAGE)).getText();
     }
 }
-
