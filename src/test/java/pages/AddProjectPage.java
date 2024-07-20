@@ -2,11 +2,13 @@ package pages;
 
 import decorators.*;
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import models.Project;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+@Log4j2
 public class AddProjectPage extends BasePage {
 
 
@@ -31,6 +33,7 @@ public class AddProjectPage extends BasePage {
 
     @Step("Creating new project")
     public void createNewProject(Project project) {
+        log.info("Creating Project - {}", project.getName());
         if (project.getName() != null) {
             new Input(driver, PROJECT_NAME).setValue(project.getName());
         }
@@ -51,6 +54,7 @@ public class AddProjectPage extends BasePage {
     }
     @Step("Creating new project")
     public void createProjectWithReferences(Project project) {
+        log.info("Creating Project with references - {}", project.getName());
         if (project.getName() != null) {
             new Input(driver, PROJECT_NAME).setValue(project.getName());
         }

@@ -34,11 +34,11 @@ public class DropDown extends ElementDecorator {
         expand();
         WebElement option = this.getOptionByText(value);
         try {
-            log.debug("Select option {}", this.dataTestId);
+            log.debug("Select option {}", value);
             option.click();
         } catch (ElementNotInteractableException exception) {
             setSearchValue(value);
-            log.debug("Select option {}", this.dataTestId);
+            log.debug("Select option {}", value);
             option.click();
         }
 

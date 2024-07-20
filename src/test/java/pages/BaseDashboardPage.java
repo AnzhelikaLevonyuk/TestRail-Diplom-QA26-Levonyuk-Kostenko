@@ -3,6 +3,7 @@ package pages;
 import decorators.Button;
 import decorators.Input;
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.io.File;
 
+@Log4j2
 public class BaseDashboardPage extends BasePage {
 
     private static final By DASHBOARD_TAB = By.id("navigation-dashboard");
@@ -65,7 +67,7 @@ public class BaseDashboardPage extends BasePage {
 
     @Step("Add attachment")
     public void addAttachment(File uploadFile) {
-
+        log.info("Adding attacment - {}", uploadFile);
         new Button(driver, ADD_ATTACHMENT_BUTTON).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(ADD_ATTACHMENT_DIALOG_SUBMIT_BUTTON));
         new Input(driver, FILE_INPUT).setValue(uploadFile.getAbsolutePath());

@@ -37,7 +37,7 @@ public class PlanApiTest extends BaseApiTest {
     }
 
     @Test(groups = {"api", "need create project", "need create milestone", "beforeCreatePlan"}, description = "Creating new plan by Api and than deleting it")
-    public void DeletePlan() {
+    public void deletePlan() {
         Response response = planController.deletePlan(planId);
         Assert.assertEquals(response.getStatusCode(), 200);
     }
