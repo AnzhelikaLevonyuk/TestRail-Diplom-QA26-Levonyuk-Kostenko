@@ -1,0 +1,49 @@
+
+name: Selenium tests
+
+on:
+  schedule:
+    - cron: '35 19 * * *'
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      browser:
+        description: 'Choose a browser'
+        required: true
+        default: 'chrome'
+        type: choice
+        options:
+        - chrome
+        - edge
+        - safari
+        - firefox
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'corretto'
+        cache: maven
+    - name: Run tests
+      run: mvn -B clean test -Dbrowser=${{ github.event.inputs.browser || 'chrome' }}
+
+    - name: Generate Allure report
+      if: always()
+      run: mvn allure:report
+        
+    - name: Upload allure Report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+          name: allure-report
+          path: target/allure-results
+
