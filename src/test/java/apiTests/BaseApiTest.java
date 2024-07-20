@@ -1,28 +1,42 @@
 package apiTests;
 
 import controllers.*;
+
+import controllers.MilestoneController;
+import controllers.ProjectController;
+import controllers.TestRunController;
+
 import io.restassured.response.Response;
 import models.Milestone;
 import models.Plan;
 import models.Project;
 import models.Section;
+import models.TestRun;
+
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import utils.TestDataGeneration;
 
 public abstract class BaseApiTest {
-    ProjectController projectController = new ProjectController();
+  
     protected Project project;
-    protected int projectId;
-    MilestoneController milestoneController = new MilestoneController();
     protected Milestone milestone;
-    protected int milestoneId;
-    SectionController sectionController = new SectionController();
     protected Section section;
+    protected TestRun testRun;
+    protected Plan plan;
+   
+    protected int projectId;
+    protected int milestoneId;
+    protected int testRunId;
+  
+    ProjectController projectController = new ProjectController();
+    MilestoneController milestoneController = new MilestoneController();
+    SectionController sectionController = new SectionController();
     TestCaseController testCaseController = new TestCaseController();
     SuiteController suiteController = new SuiteController();
     PlanController planController = new PlanController();
-    protected Plan plan;
+    TestRunController testRunController = new TestRunController();
+  
 
     @BeforeMethod(onlyForGroups = "need create project", alwaysRun = true)
     public void beforeCreateProject() {
@@ -42,5 +56,11 @@ public abstract class BaseApiTest {
         Response response = milestoneController.createMilestone(milestone, projectId);
         milestoneId = response.getBody().jsonPath().getInt("id");
     }
-
+  
+    @BeforeMethod(alwaysRun = true, onlyForGroups = "need create testRun", dependsOnMethods = "beforeCreateMilestone")
+    public void beforeCreateTestRun() {
+        testRun = TestDataGeneration.generateTestRun(milestoneId);
+        Response response = testRunController.createTestRun(testRun, projectId);
+        testRunId = response.getBody().jsonPath().getInt("id");
+    }
 }

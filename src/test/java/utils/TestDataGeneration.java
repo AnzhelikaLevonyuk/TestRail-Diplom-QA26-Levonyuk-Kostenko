@@ -2,10 +2,7 @@ package utils;
 
 import com.github.javafaker.Faker;
 import enums.*;
-import models.Milestone;
-import models.Project;
-import models.Section;
-import models.TestCase;
+import models.*;
 
 public class TestDataGeneration {
     static Faker faker = new Faker();
@@ -164,6 +161,16 @@ public class TestDataGeneration {
                 .setReferences("References")
                 .setDescription("Description")
                 .setMilestoneIsCompleted(true)
+                .build();
+    }
+
+    public static TestRun generateTestRun(int milestoneId)
+    {
+        return TestRun.builder()
+                .setName(faker.color().name() + faker.number().randomDigit())
+                .setReferences("References Of TestRun")
+                .setMilestoneId(milestoneId)
+                .setDescription("Description of TestRun")
                 .build();
     }
 }

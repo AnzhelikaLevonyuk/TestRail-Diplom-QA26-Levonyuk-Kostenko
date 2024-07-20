@@ -1,5 +1,4 @@
 package models;
-
 import com.google.gson.annotations.SerializedName;
 import lombok.Builder;
 import lombok.Data;
@@ -19,5 +18,6 @@ public class Milestone {
     @EqualsAndHashCode.Exclude
     @SerializedName("is_completed")
     private boolean milestoneIsCompleted;
+
 
 }
