@@ -1,5 +1,5 @@
 
-name: Selenium tests
+name: Selenium tests2
 
 on:
   schedule:
