@@ -12,5 +12,5 @@ public class Section {
     String description;
     @EqualsAndHashCode.Exclude
     @SerializedName("suite_id")
-    int suiteId;
+    Integer suiteId;
 }

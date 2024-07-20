@@ -20,6 +20,7 @@ public class TestCaseApiTest extends BaseApiTest {
         TestCase testCase = new Gson().fromJson(new FileReader(filePath), TestCase.class);
 
         section = TestDataGeneration.generateSection();
+        section.setSuiteId(null);
         Response response = sectionController.addSection(section, projectId);
         int sectionId = response.getBody().jsonPath().get("id");
 

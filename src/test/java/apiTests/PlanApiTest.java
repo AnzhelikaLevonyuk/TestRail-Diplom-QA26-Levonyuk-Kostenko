@@ -13,9 +13,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 public class PlanApiTest extends BaseApiTest {
-    int planId;
+    protected int planId;
 
-    @BeforeMethod(onlyForGroups = "beforeCreatePlan")
+    @BeforeMethod(onlyForGroups = "beforeCreatePlan", alwaysRun = true)
     public void beforeCreatePlan() {
         plan = Plan.builder().name("Test Plan").description("Description for plan").milestoneId(milestoneId).build();
         Response response = planController.addPlan(projectId, plan);
