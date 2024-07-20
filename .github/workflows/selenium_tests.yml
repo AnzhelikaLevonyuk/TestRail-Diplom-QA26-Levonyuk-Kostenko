@@ -3,11 +3,11 @@ name: Selenium tests
 
 on:
   schedule:
-    - cron: '55 17 * * *'
+    - cron: '35 19 * * *'
   push:
-    branches: [ "develop" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "develop" ]
+    branches: [ "main" ]
   workflow_dispatch:
     inputs:
       browser:
@@ -37,9 +37,11 @@ jobs:
       run: mvn -B clean test -Dbrowser=${{ github.event.inputs.browser || 'chrome' }}
 
     - name: Generate Allure report
+      if: always()
       run: mvn allure:report
         
     - name: Upload allure Report
+      if: always()
       uses: actions/upload-artifact@v4
       with:
           name: allure-report
