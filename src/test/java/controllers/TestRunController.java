@@ -20,7 +20,7 @@ public class TestRunController extends BaseController {
                 .extract().response();
     }
 
-    public Response getTestRun(TestRun testRun, int testRunId)
+    public Response getTestRun(int testRunId)
     {
         return given()
                 .pathParam("run_id", testRunId)
@@ -43,7 +43,7 @@ public class TestRunController extends BaseController {
                 .extract().response();
     }
 
-    public Response deleteTestRun(TestRun testRun, int testRunId)
+    public Response deleteTestRun(int testRunId)
     {
         return given()
                 .pathParam("run_id", testRunId)

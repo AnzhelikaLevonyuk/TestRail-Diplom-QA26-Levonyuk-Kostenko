@@ -33,7 +33,7 @@ public class MilestoneController extends BaseController {
                 .extract().response();
     }
 
-    public Response getMilestone(Milestone milestone, int milestoneId)
+    public Response getMilestone(int milestoneId)
     {
         return given()
                 .pathParam("milestone_id", milestoneId)

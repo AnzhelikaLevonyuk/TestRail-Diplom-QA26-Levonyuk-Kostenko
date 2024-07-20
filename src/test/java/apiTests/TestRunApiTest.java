@@ -14,7 +14,7 @@ import java.io.FileReader;
 
 public class TestRunApiTest extends BaseApiTest {
 
-    @Test(groups = {"need create milestone", "api"}, description = "this test checks creation of TestRun by Api from JSON File")
+    @Test(groups = {"api", "need create milestone", "need create project"}, description = "this test checks creation of TestRun by Api from JSON File")
     public void createTestRunFromJsonFile() throws FileNotFoundException
     {
         String pathToJsonFile = System.getProperty("user.dir") + PropertyReader.getProperty("json.TestRun.dir");
@@ -26,7 +26,7 @@ public class TestRunApiTest extends BaseApiTest {
         Assert.assertEquals(actualTestRun, testRun);
     }
 
-    @Test(groups = {"need create milestone", "api"}, description = "this test checks creation of TestRun by Api")
+    @Test(groups = {"api", "need create milestone", "need create project"}, description = "this test checks creation of TestRun by Api")
     public void createTestRun()
     {
         testRun = TestDataGeneration.generateTestRun(milestoneId);
@@ -36,17 +36,17 @@ public class TestRunApiTest extends BaseApiTest {
         Assert.assertEquals(actualTestRun, testRun);
     }
 
-    @Test(groups = {"api", "need create testRun", "need create milestone"}, description = "this test get testRun by Api")
+    @Test(groups = {"api", "need create testRun", "need create milestone", "need create project"}, description = "this test checks getting of testRun by Api")
     public void readTestRun()
     {
-        Response response = testRunController.getTestRun(testRun, testRunId);
+        Response response = testRunController.getTestRun(testRunId);
         Assert.assertEquals(200, response.getStatusCode());
         TestRun actualTestRun = response.getBody().as(TestRun.class, ObjectMapperType.GSON);
         Assert.assertEquals(actualTestRun.getDescription(), testRun.getDescription());
     }
 
 
-    @Test(groups = {"api", "need create testRun", "need create milestone"}, description = "this test checks updating of TestRun by Api")
+    @Test(groups = {"api", "need create testRun", "need create milestone", "need create project"}, description = "this test checks updating of TestRun by Api")
     public void updateTestRun()
     {
         Response response = testRunController.updateTestRun(testRun, testRunId);
@@ -55,10 +55,10 @@ public class TestRunApiTest extends BaseApiTest {
         Assert.assertEquals(updatedTestRun, testRun);
     }
 
-    @Test(groups = {"api", "need create testRun", "need create milestone"}, description = "this test delete testRun by Api")
+    @Test(groups = {"api", "need create testRun", "need create milestone", "need create project"}, description = "this test checks deleting of testRun by Api")
     public void deleteTestRun()
     {
-        Response response = testRunController.deleteTestRun(testRun, testRunId);
+        Response response = testRunController.deleteTestRun(testRunId);
         Assert.assertEquals(200, response.getStatusCode());
         boolean isTestRunDeleted = response.getBody().asString().isEmpty();
         Assert.assertTrue(isTestRunDeleted);
