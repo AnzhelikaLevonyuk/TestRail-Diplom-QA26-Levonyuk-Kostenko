@@ -3,11 +3,11 @@ name: Selenium tests2
 
 on:
   schedule:
-    - cron: '56 13 * * *'
+    - cron: '27 19 * * *'
   push:
-    branches: [ "develop" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "develop" ]
+    branches: [ "main" ]
   workflow_dispatch:
     inputs:
       browser:
