@@ -122,9 +122,11 @@ https://github.com/AnzhelikaLevonyuk/TestRail-Diplom-QA26-Levonyuk-Kostenko.git
 5. Change password
 
 ### TestNG command for running all tests and getting report:
-- mvn clean test
-- allure generate target/allure-results
-- allure serve target/allure-results
+-mvn clean test
+
+-allure generate target/allure-results
+
+-allure serve target/allure-results
 
 ##### By Anzhelika Levonyuk & Marina Kostenko
 
