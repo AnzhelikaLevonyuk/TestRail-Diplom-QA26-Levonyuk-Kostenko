@@ -1,10 +1,11 @@
 package apiTests;
 
-import controllers.MilestoneController;
-import controllers.ProjectController;
+import controllers.*;
 import io.restassured.response.Response;
 import models.Milestone;
+import models.Plan;
 import models.Project;
+import models.Section;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import utils.TestDataGeneration;
@@ -12,12 +13,18 @@ import utils.TestDataGeneration;
 public abstract class BaseApiTest {
     ProjectController projectController = new ProjectController();
     protected Project project;
-    public int projectId;
+    protected int projectId;
     MilestoneController milestoneController = new MilestoneController();
     protected Milestone milestone;
-    public int milestoneId;
+    protected int milestoneId;
+    SectionController sectionController = new SectionController();
+    protected Section section;
+    TestCaseController testCaseController = new TestCaseController();
+    SuiteController suiteController = new SuiteController();
+    PlanController planController = new PlanController();
+    protected Plan plan;
 
-    @BeforeMethod(alwaysRun = true)
+    @BeforeMethod(onlyForGroups = "need create project", alwaysRun = true)
     public void beforeCreateProject() {
         project = TestDataGeneration.generateProject();
         Response response = projectController.createProject(project);

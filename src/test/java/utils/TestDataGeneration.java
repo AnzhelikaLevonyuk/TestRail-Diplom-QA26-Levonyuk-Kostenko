@@ -114,7 +114,7 @@ public class TestDataGeneration {
     {
         return Section.builder()
                 .setName("Section" + faker.number().randomDigit())
-                .setDescription("Description for section")
+                .setDescription("Description for section 12345")
                 .build();
     }
 

@@ -5,12 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Builder(setterPrefix = "set")
+@Builder
 @Data
-public class Section {
+public class Plan {
     String name;
     String description;
+    @SerializedName("milestone_id")
+    int milestoneId;
     @EqualsAndHashCode.Exclude
-    @SerializedName("suite_id")
-    int suiteId;
+    String refs;
 }
+

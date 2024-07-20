@@ -8,20 +8,7 @@ import static io.restassured.RestAssured.given;
 
 public class MilestoneController extends BaseController {
 
-    public Response createMilestoneFromFile(Milestone milestone, int projectId)
-    {
-        return given()
-                .body(milestone)
-                .pathParam("project_id", projectId)
-                .when()
-                .post("index.php?/api/v2/add_milestone/{project_id}")
-                .then()
-                .log().all()
-                .extract().response();
-    }
-
-    public Response createMilestone(Milestone milestone, int projectId)
-    {
+    public Response createMilestone(Milestone milestone, int projectId) {
         return given()
                 .body(milestone, ObjectMapperType.GSON)
                 .pathParam("project_id", projectId)
@@ -32,8 +19,7 @@ public class MilestoneController extends BaseController {
                 .extract().response();
     }
 
-    public Response updateMilestone(Milestone milestone, int milestoneId)
-    {
+    public Response updateMilestone(Milestone milestone, int milestoneId) {
         return given()
                 .body(milestone, ObjectMapperType.GSON)
                 .pathParam("milestone_id", milestoneId)
@@ -44,8 +30,7 @@ public class MilestoneController extends BaseController {
                 .extract().response();
     }
 
-    public Response getMilestone(Milestone milestone, int milestoneId)
-    {
+    public Response getMilestone(int milestoneId) {
         return given()
                 .pathParam("milestone_id", milestoneId)
                 .when()
