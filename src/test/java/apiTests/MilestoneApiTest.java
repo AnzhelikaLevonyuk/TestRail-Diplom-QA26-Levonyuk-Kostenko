@@ -20,7 +20,7 @@ public class MilestoneApiTest extends BaseApiTest {
     {
         String pathToJsonFile = System.getProperty("user.dir") + PropertyReader.getProperty("json.Milestone.dir");
         milestone = new Gson().fromJson(new FileReader(pathToJsonFile), Milestone.class);
-        Response response = milestoneController.createMilestoneFromFile(milestone, projectId);
+        Response response = milestoneController.createMilestone(milestone, projectId);
         Assert.assertEquals(200, response.getStatusCode());
         Milestone actualMilestone = response.getBody().as(Milestone.class, ObjectMapperType.GSON);
         Assert.assertEquals(actualMilestone, milestone);
@@ -36,7 +36,7 @@ public class MilestoneApiTest extends BaseApiTest {
         Assert.assertEquals(actualMilestone, milestone);
     }
 
-    @Test(description = "this test checks creation of milestone by Api", groups = "need create milestone")
+    @Test(description = "this test checks updating of milestone by Api", groups = "need create milestone")
     public void updateMilestone()
     {
         Response response = milestoneController.updateMilestone(milestone, milestoneId);
@@ -45,12 +45,21 @@ public class MilestoneApiTest extends BaseApiTest {
         Assert.assertEquals(updatedMilestone, milestone);
     }
 
-    @Test(description = "this test checks creation of milestone by Api", groups = "need create milestone")
+    @Test(description = "this test get milestone by Api", groups = "need create milestone")
     public void readMilestone()
     {
         Response response = milestoneController.getMilestone(milestone, milestoneId);
         Assert.assertEquals(200, response.getStatusCode());
         Milestone actualMilestone = response.getBody().as(Milestone.class, ObjectMapperType.GSON);
         Assert.assertEquals(actualMilestone.getDescription(), milestone.getDescription());
+    }
+
+    @Test(description = "this test delete milestone by Api", groups = "need create milestone")
+    public void deleteMilestone()
+    {
+        Response response = milestoneController.deleteMilestone(milestone, milestoneId);
+        Assert.assertEquals(200, response.getStatusCode());
+        boolean isMilestoneDeleted = response.getBody().asString().isEmpty();
+        Assert.assertTrue(isMilestoneDeleted);
     }
 }
