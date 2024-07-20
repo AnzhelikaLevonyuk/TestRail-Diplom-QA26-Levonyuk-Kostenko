@@ -37,9 +37,11 @@ jobs:
       run: mvn -B clean test -Dbrowser=${{ github.event.inputs.browser || 'chrome' }}
 
     - name: Generate Allure report
+      if: always()
       run: mvn allure:report
         
     - name: Upload allure Report
+      if: always()
       uses: actions/upload-artifact@v4
       with:
           name: allure-report
