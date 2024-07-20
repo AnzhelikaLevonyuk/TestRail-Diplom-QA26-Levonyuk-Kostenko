@@ -8,7 +8,7 @@ import static io.restassured.RestAssured.given;
 
 public class ProjectController extends BaseController {
 
-    public Response createProject(Project project){
+    public Response createProject(Project project) {
 
         return given()
                 .body(project, ObjectMapperType.GSON)
@@ -18,7 +18,7 @@ public class ProjectController extends BaseController {
                 .extract().response();
     }
 
-    public Response deleteProject(int projectId){
+    public Response deleteProject(int projectId) {
 
         return given()
                 .pathParams("project_id", projectId)
@@ -27,6 +27,26 @@ public class ProjectController extends BaseController {
                 .then().log().all()
                 .extract().response();
     }
+
+    public Response getProject(int projectId) {
+
+        return given()
+                .pathParams("project_id", projectId)
+                .when()
+                .get("index.php?/api/v2/get_project/{project_id}")
+                .then().log().all()
+                .extract().response();
+    }
+
+    public Response getProjects() {
+
+        return given()
+                .when()
+                .get("index.php?/api/v2/get_projects")
+                .then().log().all()
+                .extract().response();
+    }
+
 
 }
 

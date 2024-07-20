@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 import utils.TestDataGeneration;
 
 public class ProjectApiTest extends BaseApiTest {
-    @Test
+    @Test(groups = "api", description = "Creating new project by Api")
     public void createProject() {
         project = TestDataGeneration.generateProject();
         Response response = projectController.createProject(project);
@@ -18,10 +18,25 @@ public class ProjectApiTest extends BaseApiTest {
         Assert.assertEquals(actualProject, project);
     }
 
-    @Test
+    @Test(groups = {"api", "need create project"}, description = "Deleting project by Api")
     public void deleteProject() {
         Response response = projectController.deleteProject(projectId);
         Assert.assertEquals(response.getStatusCode(), 200);
     }
+
+    @Test(groups = {"api", "need create project"}, description = "Checking project information")
+    public void getProject() {
+        Response response = projectController.getProject(projectId);
+        Assert.assertEquals(response.getStatusCode(), 200);
+        Project actualProject = response.getBody().as(Project.class, ObjectMapperType.GSON);
+        Assert.assertEquals(actualProject, project);
+    }
+
+    @Test(groups = {"api", "need create project"}, description = "Checking all projects")
+    public void getProjects() {
+        Response response = projectController.getProjects();
+        Assert.assertEquals(response.getStatusCode(), 200);
+    }
+
 }
 

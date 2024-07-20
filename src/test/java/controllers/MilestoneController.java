@@ -8,6 +8,7 @@ import static io.restassured.RestAssured.given;
 
 public class MilestoneController extends BaseController {
 
+
     public Response createMilestone(Milestone milestone, int projectId)
     {
         return given()
@@ -43,7 +44,7 @@ public class MilestoneController extends BaseController {
                 .extract().response();
     }
 
-    public Response deleteMilestone(Milestone milestone, int milestoneId)
+    public Response deleteMilestone(int milestoneId)
     {
         return given()
                 .pathParam("milestone_id", milestoneId)

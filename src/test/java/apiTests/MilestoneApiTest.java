@@ -15,9 +15,8 @@ import java.io.FileReader;
 public class MilestoneApiTest extends BaseApiTest {
 
 
-    @Test(description = "this test checks creation of milestone by Api from JSON File")
-    public void createMilestoneFromJsonFile() throws FileNotFoundException
-    {
+    @Test(groups = {"api", "need create project"}, description = "this test checks creation of milestone by Api from JSON File")
+    public void createMilestoneFromJsonFile() throws FileNotFoundException {
         String pathToJsonFile = System.getProperty("user.dir") + PropertyReader.getProperty("json.Milestone.dir");
         milestone = new Gson().fromJson(new FileReader(pathToJsonFile), Milestone.class);
         Response response = milestoneController.createMilestone(milestone, projectId);
@@ -26,9 +25,8 @@ public class MilestoneApiTest extends BaseApiTest {
         Assert.assertEquals(actualMilestone, milestone);
     }
 
-    @Test(description = "this test checks creation of milestone by Api")
-    public void createMilestone()
-    {
+    @Test(groups = {"api", "need create project"}, description = "this test checks creation of milestone by Api")
+    public void createMilestone() {
         milestone = TestDataGeneration.generateSimpleMilestone();
         Response response = milestoneController.createMilestone(milestone, projectId);
         Assert.assertEquals(200, response.getStatusCode());
@@ -36,18 +34,18 @@ public class MilestoneApiTest extends BaseApiTest {
         Assert.assertEquals(actualMilestone, milestone);
     }
 
-    @Test(description = "this test checks updating of milestone by Api", groups = "need create milestone")
-    public void updateMilestone()
-    {
+
+    @Test(groups = {"api", "need create project", "need create milestone"}, description = "this test checks creation of milestone by Api")
+    public void updateMilestone() {
         Response response = milestoneController.updateMilestone(milestone, milestoneId);
         Assert.assertEquals(200, response.getStatusCode());
         Milestone updatedMilestone = response.getBody().as(Milestone.class, ObjectMapperType.GSON);
         Assert.assertEquals(updatedMilestone, milestone);
     }
 
-    @Test(description = "this test get milestone by Api", groups = "need create milestone")
-    public void readMilestone()
-    {
+
+    @Test(groups = {"api", "need create project", "need create milestone"}, description = "this test checks creation of milestone by Api")
+    public void readMilestone() {
         Response response = milestoneController.getMilestone(milestone, milestoneId);
         Assert.assertEquals(200, response.getStatusCode());
         Milestone actualMilestone = response.getBody().as(Milestone.class, ObjectMapperType.GSON);
@@ -57,7 +55,7 @@ public class MilestoneApiTest extends BaseApiTest {
     @Test(description = "this test delete milestone by Api", groups = "need create milestone")
     public void deleteMilestone()
     {
-        Response response = milestoneController.deleteMilestone(milestone, milestoneId);
+        Response response = milestoneController.deleteMilestone(milestoneId);
         Assert.assertEquals(200, response.getStatusCode());
         boolean isMilestoneDeleted = response.getBody().asString().isEmpty();
         Assert.assertTrue(isMilestoneDeleted);
