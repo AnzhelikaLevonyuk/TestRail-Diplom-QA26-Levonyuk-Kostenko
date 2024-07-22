@@ -3,7 +3,7 @@ name: Selenium tests
 
 on:
   schedule:
-    - cron: '25 14 * * *'
+    - cron: '30 14 * * *'
   push:
     branches: [ "develop" ]
   pull_request:
@@ -43,7 +43,7 @@ jobs:
         distribution: 'corretto'
         cache: maven
     - name: Run tests
-      run: mvn -B clean test -Dbrowser=${{ github.event.inputs.browser || 'chrome' }} -Dsuite=${{ github.event.inputs.suite || 'regression' }}
+      run: mvn -B clean test -Dbrowser=${{ github.event.inputs.browser || 'chrome' }} -Dsuite=${{ github.event.inputs.suite || 'api' }}
 
     - name: Generate Allure report
       if: always()
