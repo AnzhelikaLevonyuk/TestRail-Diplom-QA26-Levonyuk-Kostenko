@@ -81,23 +81,6 @@ public abstract class BaseTest {
         projectId = response.getBody().jsonPath().getInt("id");
     }
 
-    @BeforeMethod(dependsOnMethods = "beforeCreateProject", onlyForGroups = "TestCaseShouldBeCreated", alwaysRun = true)
-    public void beforeCreateTestCase()
-    {
-        testCase = TestDataGeneration.generateTestCase();
-
-        dashboardPage.openProject(project.getName());
-        overviewProjectPage.isPageOpened();
-        overviewProjectPage.clickTestCasesTab();
-        testCasesPage.isPageOpened();
-        testCasesPage.clickAddTestCaseButton();
-        addTestCasePage.isPageOpened();
-        addTestCasePage.createTestCase(testCase);
-        addTestCasePage.clickCreateTestCaseButton();
-        testCaseInfoPage.returnToDashboardTab();
-        dashboardPage.isPageOpened();
-
-    }
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
         projectController.deleteProject(projectId);

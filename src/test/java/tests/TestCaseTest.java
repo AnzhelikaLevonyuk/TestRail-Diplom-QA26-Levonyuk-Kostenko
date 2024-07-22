@@ -2,6 +2,7 @@ package tests;
 
 import models.TestCase;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import utils.PropertyReader;
 import utils.TestDataGeneration;
@@ -10,6 +11,23 @@ import java.io.File;
 
 public class TestCaseTest extends BaseTest {
 
+    @BeforeMethod(onlyForGroups = "TestCaseShouldBeCreated", alwaysRun = true)
+    public void beforeCreateTestCase()
+    {
+        testCase = TestDataGeneration.generateTestCase();
+
+        dashboardPage.openProject(project.getName());
+        overviewProjectPage.isPageOpened();
+        overviewProjectPage.clickTestCasesTab();
+        testCasesPage.isPageOpened();
+        testCasesPage.clickAddTestCaseButton();
+        addTestCasePage.isPageOpened();
+        addTestCasePage.createTestCase(testCase);
+        addTestCasePage.clickCreateTestCaseButton();
+        testCaseInfoPage.returnToDashboardTab();
+        dashboardPage.isPageOpened();
+
+    }
 
     @Test(groups = {"smoke", "userShouldBeLogin", "ProjectShouldBeCreated"}, description = "Creating new test case")
     public void createTestCase() {
