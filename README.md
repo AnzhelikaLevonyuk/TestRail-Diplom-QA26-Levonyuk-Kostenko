@@ -1,44 +1,35 @@
 # Test Automation Project
-
 <a href="https://www.testrail.com">    
-<img src="https://beliefy.io/wp-content/uploads/2023/05/test-rail-logo.png" align="right" height="100" />
+<img src="https://www.testrail.com/wp-content/uploads/2023/03/Frame-4.png" align="right" height="150" />
 </a>
 
 ### **Overview**
-
 TestRail is a web-based test management tool designed to help software development teams manage and streamline their testing processes. 
 TestRail helps teams improve their testing efficiency, ensure quality, and manage their testing  
 efforts more effectively.
 
 ### **Project Description**
 This code represents a set of tests for automated testing of an application using Selenium and TestNG, including API tests. It describes various test scenarios for verifying the functionality of the application, such as logging in, creating and editing projects, creating test cases, sections, milestones and etc.
+#
 
 ### **Clone the repository into your projects directory:**
-
 https://github.com/AnzhelikaLevonyuk/TestRail-Diplom-QA26-Levonyuk-Kostenko.git
-<img src="https://tomaytotomato.com/content/images/2021/08/idea_maven.jpg" align="right" height="150"  />
-
 ### Installation:
 
 * IDE: IntelliJ
 * Programming Language: JAVA
 * Project Type: Maven
 
-<img src="https://miro.medium.com/v2/resize:fit:900/1*6bZs3KLKyklErU7DmgvOZA.jpeg" align="right" height="200" />
-<img src="https://media.licdn.com/dms/image/D4D12AQH1GCJbqMykGw/article-cover_image-shrink_600_2000/0/1691676585590?e=2147483647&v=beta&t=97tvVyzZ7IaiL8AblLtGLGdILY6o3SHMMdLYcal9g40" align="right" height="90" />
-
 ### Stack:
 
-* 	Selenium
-* 	TestNG
-* 	JavaFaker
-* 	Lombok
-<img src="https://media.licdn.com/dms/image/C5112AQFngbBhSj3ddw/article-cover_image-shrink_600_2000/0/1563569518559?e=2147483647&v=beta&t=imIxg_tXWA2mpdHp5ZPHoA0JtpbCS4iyR5ZsKK1445E" align="right" height="100" />
-
-* 	Log4j
-* 	Jackson
-* 	Rest-Assured
-*   Gson
+* 	Selenium [4.19.1]
+* 	TestNG [7.10.1]
+* 	JavaFaker [1.0.2]
+* 	Lombok [1.18.26]
+* 	Log4j [2.23.1]
+* 	Jackson [2.12.3]
+* 	Rest-Assured [5.5.0]
+*   Gson [2.10.1]
 
 ### Patterns used:
 
@@ -47,7 +38,6 @@ https://github.com/AnzhelikaLevonyuk/TestRail-Diplom-QA26-Levonyuk-Kostenko.git
 * 	Value Object
 * 	Builder
 * 	Loadable Page
-<img src="https://allurereport.org/assets/re_preview.289b598a.png" align="right" height="200" />
 
 ### Reporting:
 *	Allure reporting
@@ -56,6 +46,7 @@ https://github.com/AnzhelikaLevonyuk/TestRail-Diplom-QA26-Levonyuk-Kostenko.git
 
 *	GitHub
 
+#
 ### Checklist:
 
 #### Login
@@ -122,22 +113,22 @@ https://github.com/AnzhelikaLevonyuk/TestRail-Diplom-QA26-Levonyuk-Kostenko.git
 * 	Verify successful creating and then closing a plan using the API.
 * 	Verify successful deleting a plan using the API.
 * 	Verify successful updating a plan using the API from a JSON file.
+#
+> [!NOTE]
+> #### Instructions for running of tests:
+>1. Open resources directory
+>2. Open config.properties file
+>3. Change base_url
+>4. Change email
+>5. Change password
+> #### TestNG command for running all tests and getting report:
+>-mvn clean test
+> 
+>-allure generate target/allure-results
+> 
+>-allure serve target/allure-results
 
-### Instructions for running of tests:
-1. Open resources directory
-2. Open config.properties file
-3. Change base_url
-4. Change email
-5. Change password
-
-### TestNG command for running all tests and getting report:
--mvn clean test
-
--allure generate target/allure-results
-
--allure serve target/allure-results
-
-##### By Anzhelika Levonyuk & Marina Kostenko
+###### By Anzhelika Levonyuk & Marina Kostenko 👩🏽‍💻
 
 
 
