@@ -1,5 +1,5 @@
 
-name: Selenium tests2
+name: Selenium tests
 
 on:
   schedule:
@@ -20,6 +20,15 @@ on:
         - edge
         - safari
         - firefox
+      suite:
+        description: 'Choose a test suite'
+        required: true
+        default: 'smoke'
+        type: choice
+        options:
+          - smoke
+          - regression
+          - api  
 jobs:
   build:
 
@@ -34,7 +43,7 @@ jobs:
         distribution: 'corretto'
         cache: maven
     - name: Run tests
-      run: mvn -B clean test -Dbrowser=${{ github.event.inputs.browser || 'chrome' }}
+      run: mvn -B clean test -Dbrowser=${{ github.event.inputs.browser || 'chrome' }} -Dsuite=${{ github.event.inputs.suite || 'smoke' }}
 
     - name: Generate Allure report
       if: always()
