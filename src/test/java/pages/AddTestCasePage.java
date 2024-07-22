@@ -5,11 +5,13 @@ import decorators.DropDown;
 import decorators.Input;
 import decorators.TextArea;
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import models.TestCase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+@Log4j2
 public class AddTestCasePage extends BaseDashboardPage {
     private static final String TITLE = "addEditCaseTitle";
     private static final By PRECONDITION = By.cssSelector("#custom_preconds_attachments_wrapper  div.form-control");
@@ -40,6 +42,7 @@ public class AddTestCasePage extends BaseDashboardPage {
     @Step("Create new test-case")
     public void createTestCase(TestCase testCase)
     {
+        log.info("Creating Test Case(Text) {}", testCase.getTitle());
         new Input(driver, TITLE).setValue(testCase.getTitle());
         new DropDown(driver, driver.findElement(TEMPLATE)).selectByVisibleText(testCase.getTemplate().getName());
         new DropDown(driver, driver.findElement(TYPE)).selectByVisibleText(testCase.getType().getName());
@@ -53,9 +56,10 @@ public class AddTestCasePage extends BaseDashboardPage {
         new TextArea(driver, driver.findElement(EXPECTED_RESULT)).setValue(testCase.getExpectedResult());
     }
 
-    @Step("Create new test-case")
+    @Step("Create new test-case(steps)")
     public void createTestCaseSteps(TestCase testCase)
     {
+        log.info("Creating Test Case(Steps) {}", testCase.getTitle());
         new Input(driver, TITLE).setValue(testCase.getTitle());
         new DropDown(driver, driver.findElement(TEMPLATE)).selectByVisibleText(testCase.getTemplate().getName());
         waiting();
@@ -70,6 +74,7 @@ public class AddTestCasePage extends BaseDashboardPage {
 
     @Step("Editing test Case")
     public void editTestCase(TestCase testCase) {
+        log.info("Editing Test Case(Text) {}", testCase.getTitle());
         new Input(driver, TITLE).clearAndSetValue(testCase.getTitle());
 
         if (testCase.getType() != null) {
@@ -89,10 +94,10 @@ public class AddTestCasePage extends BaseDashboardPage {
 
     }
 
-    @Step("Editing test Case")
+    @Step("Edit test Case(Steps)")
     public void editTestCaseToTestCaseSteps(TestCase testCase) {
+        log.info("Editing Test Case(Steps) {}", testCase.getTitle());
         new Input(driver, TITLE).clearAndSetValue(testCase.getTitle());
-
         new DropDown(driver, driver.findElement(TEMPLATE)).selectByVisibleText(testCase.getTemplate().getName());
         waiting();
         new Button(driver, ADD_STEP_BUTTON).click();
@@ -101,8 +106,10 @@ public class AddTestCasePage extends BaseDashboardPage {
     }
 
     @Step("Click 'Create Test Case' button")
+
     public void clickCreateTestCaseButton()
     {
+        log.info("Clicking Create Test case button");
         new Button(driver, CREATE_TEST_CASE_BUTTON).click();
     }
 
@@ -112,4 +119,3 @@ public class AddTestCasePage extends BaseDashboardPage {
         return driver.findElement(By.xpath(ERROR_ESTIMATE_MESSAGE)).getText();
     }
 }
-

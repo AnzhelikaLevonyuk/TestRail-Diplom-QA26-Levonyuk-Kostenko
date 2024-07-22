@@ -48,7 +48,7 @@ public class ProjectTest extends BaseTest {
         Assert.assertTrue(projectsPage.isProjectCreated(updatedProject.getName()));
     }
 
-    @Test(groups = {"smoke", "userShouldBeLogin", "ProjectShouldBeCreated"}, description = "Delete milestone {milestoneName}")
+    @Test(groups = {"smoke", "userShouldBeLogin", "ProjectShouldBeCreated"}, description = "Delete project {projectName}")
     public void deleteProject()
     {
         dashboardPage.isPageOpened();

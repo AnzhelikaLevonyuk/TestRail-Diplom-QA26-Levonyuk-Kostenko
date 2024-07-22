@@ -1,5 +1,7 @@
 package tests;
 
+import controllers.ProjectController;
+import io.restassured.response.Response;
 import modals.ConfirmationModal;
 import modals.ConfirmationModalForTestCase;
 import models.Milestone;
@@ -37,6 +39,8 @@ public abstract class BaseTest {
     protected Milestone milestone;
     protected TestCase testCase;
     protected Section section;
+    ProjectController projectController = new ProjectController();
+    public int projectId;
 
 
     @BeforeMethod(alwaysRun = true)
@@ -70,16 +74,13 @@ public abstract class BaseTest {
         loginPage.login(PropertyReader.getProperty("email"), PropertyReader.getProperty("password"));
     }
 
-    @BeforeMethod(dependsOnMethods = {"setUp", "userShouldBeLogIn"}, onlyForGroups = "ProjectShouldBeCreated", alwaysRun = true)
+    @BeforeMethod(onlyForGroups = "ProjectShouldBeCreated", alwaysRun = true)
     public void beforeCreateProject() {
         project = TestDataGeneration.generateProject();
-        dashboardPage.isPageOpened();
-        dashboardPage.clickAddProjectLink();
-        addProjectPage.isPageOpened();
-        addProjectPage.createNewProject(project);
-        projectsPage.returnToDashboardTab();
-        dashboardPage.isPageOpened();
+        Response response = projectController.createProject(project);
+        projectId = response.getBody().jsonPath().getInt("id");
     }
+
     @BeforeMethod(dependsOnMethods = "beforeCreateProject", onlyForGroups = "TestCaseShouldBeCreated", alwaysRun = true)
     public void beforeCreateTestCase()
     {
@@ -99,6 +100,7 @@ public abstract class BaseTest {
     }
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
+        projectController.deleteProject(projectId);
         driver.quit();
     }
 

@@ -90,7 +90,7 @@ public class MilestonesTest extends BaseTest {
         Assert.assertEquals(milestonesPage.getSuccessMessage(), "Successfully updated the milestone.");
     }
 
-    @Test(groups = {"smoke", "userShouldBeLogin", "ProjectShouldBeCreated", "createMilestone"}, description = "Delete milestone {milestoneName}")
+    @Test(groups = {"smoke", "userShouldBeLogin", "ProjectShouldBeCreated", "createMilestone"}, description = "Delete milestone {milestoneName} and tap Cancel button")
     public void cancelDeletingMilestone()
     {
         dashboardPage.isPageOpened();
@@ -104,7 +104,7 @@ public class MilestonesTest extends BaseTest {
         Assert.assertTrue(milestonesPage.isMilestoneDisplayed(milestone.getName()));
     }
 
-    @Test(groups = {"smoke", "userShouldBeLogin", "ProjectShouldBeCreated"}, description = "Creating new milestone")
+    @Test(groups = {"smoke", "userShouldBeLogin", "ProjectShouldBeCreated"}, description = "Creating new milestone (complete test)")
     public void milestoneCompleteTest()
     {
         milestone = TestDataGeneration.generateMilestone();

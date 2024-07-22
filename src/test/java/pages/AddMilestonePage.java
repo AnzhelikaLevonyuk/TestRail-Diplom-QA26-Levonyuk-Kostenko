@@ -5,11 +5,13 @@ import decorators.CheckBox;
 import decorators.Input;
 import decorators.TextArea;
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import models.Milestone;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+@Log4j2
 public class AddMilestonePage extends BaseDashboardPage {
     private static final String MILESTONE_NAME = "addEditMilestoneName";
     private static final String MILESTONE_REFERENCE = "addEditMilestoneReference";
@@ -35,6 +37,7 @@ public class AddMilestonePage extends BaseDashboardPage {
     @Step("Create new milestone")
     public void createMilestone(Milestone milestone)
     {
+        log.info("Creating Milestone)- {}", milestone.getName());
         new Input(driver, MILESTONE_NAME).setValue(milestone.getName());
         new Input(driver, MILESTONE_REFERENCE).setValue(milestone.getReferences());
         new TextArea(driver, MILESTONE_DESCRIPTION).setValue(milestone.getDescription());
@@ -43,7 +46,7 @@ public class AddMilestonePage extends BaseDashboardPage {
         new CheckBox(driver, MILESTONE_CHECK_BOX).check();
     }
 
-    @Step("Create new milestone without name: Fill reference:{reference}")
+    @Step("Create new milestone without name")
     public void createMilestoneWithoutName(Milestone milestone)
     {
         new Input(driver, MILESTONE_NAME).setValue(milestone.getName());
