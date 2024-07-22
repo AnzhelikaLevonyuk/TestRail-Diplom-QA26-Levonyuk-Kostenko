@@ -35,6 +35,8 @@ public class ProjectApiTest extends BaseApiTest {
     @Test(groups = {"api", "need create project"}, description = "Checking all projects")
     public void getProjects() {
         Response response = projectController.getProjects();
+        int count = response.getBody().jsonPath().getList("projects").size();
+        Assert.assertTrue(count != 0);
         Assert.assertEquals(response.getStatusCode(), 200);
     }
 

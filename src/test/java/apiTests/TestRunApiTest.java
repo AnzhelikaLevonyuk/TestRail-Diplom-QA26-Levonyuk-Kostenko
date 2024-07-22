@@ -6,9 +6,7 @@ import io.restassured.response.Response;
 import models.TestRun;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import utils.PropertyReader;
 import utils.TestDataGeneration;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
@@ -17,7 +15,7 @@ public class TestRunApiTest extends BaseApiTest {
     @Test(groups = {"api", "need create milestone", "need create project"}, description = "this test checks creation of TestRun by Api from JSON File")
     public void createTestRunFromJsonFile() throws FileNotFoundException
     {
-        String pathToJsonFile = System.getProperty("user.dir") + PropertyReader.getProperty("json.TestRun.dir");
+        String pathToJsonFile = System.getProperty("user.dir") + "/src/test/resources/ApiTestData/createTestRunRequestBody.json";
         testRun = new Gson().fromJson(new FileReader(pathToJsonFile), TestRun.class);
         testRun.setMilestoneId(milestoneId);
         Response response = testRunController.createTestRun(testRun, projectId);

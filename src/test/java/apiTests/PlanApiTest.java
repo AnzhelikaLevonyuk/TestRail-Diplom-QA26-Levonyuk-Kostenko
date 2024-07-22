@@ -7,8 +7,6 @@ import models.Plan;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import utils.PropertyReader;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
@@ -44,7 +42,7 @@ public class PlanApiTest extends BaseApiTest {
 
     @Test(groups = {"api", "need create project", "need create milestone", "beforeCreatePlan"}, description = "Updating plan by Api")
     public void updatePlan() throws FileNotFoundException {
-        String filePath = System.getProperty("user.dir") + PropertyReader.getProperty("json.newPlan.dir");
+        String filePath = System.getProperty("user.dir") + "/src/test/resources/ApiTestData/createPlanRequestBody.json";
         Plan newPlan = new Gson().fromJson(new FileReader(filePath), Plan.class);
         newPlan.setMilestoneId(milestoneId);
         Response response = planController.updatePlan(newPlan, planId);

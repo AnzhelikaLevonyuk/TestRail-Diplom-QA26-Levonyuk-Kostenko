@@ -6,18 +6,16 @@ import io.restassured.response.Response;
 import models.Milestone;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import utils.PropertyReader;
 import utils.TestDataGeneration;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 public class MilestoneApiTest extends BaseApiTest {
 
 
-    @Test(groups = {"api", "need create project", "need create project"}, description = "this test checks creation of milestone by Api from JSON File")
+    @Test(groups = {"api", "need create project"}, description = "this test checks creation of milestone by Api from JSON File")
     public void createMilestoneFromJsonFile() throws FileNotFoundException {
-        String pathToJsonFile = System.getProperty("user.dir") + PropertyReader.getProperty("json.Milestone.dir");
+        String pathToJsonFile = System.getProperty("user.dir") + "/src/test/resources/ApiTestData/createMilestoneRequestBody.json";
         milestone = new Gson().fromJson(new FileReader(pathToJsonFile), Milestone.class);
         Response response = milestoneController.createMilestone(milestone, projectId);
         Assert.assertEquals(200, response.getStatusCode());
