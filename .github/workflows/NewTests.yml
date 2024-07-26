@@ -100,7 +100,7 @@ jobs:
           cache: maven
 
       - name: Run Regression tests
-        run: mvn -B clean test -Dbrowser=${{ github.event.inputs.browser || 'chrome' }} -Dsuite=regression
+        run: mvn -B clean test -Dbrowser=${{ github.event.inputs.browser || 'edge' }} -Dsuite=regression
 
       - name: Generate Allure report
         if: always()
