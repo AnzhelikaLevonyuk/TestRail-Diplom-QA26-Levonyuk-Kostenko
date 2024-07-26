@@ -2,9 +2,9 @@ name: NewTests
 
 on:
   schedule:
-    - cron: '14 19 * * *'
-    - cron: '15 19 * * *'
-    - cron: '13 19 * * *'
+    - cron: '07 20 * * *'
+    - cron: '08 20 * * *'
+    - cron: '09 20 * * *'
   push:
     branches: [ "develop" ]
   pull_request:
@@ -32,68 +32,32 @@ on:
           - api
 
 jobs:
-  setup:
+  tests:
     runs-on: windows-latest
-    outputs:
-      java-version: '17'
-      distribution: 'corretto'
+    strategy:
+      matrix:
+        include:
+          - suite: api
+            browser: chrome
+       
+          - suite: smoke
+            browser: edge
+          
+          - suite: regression
+            browser: ${{ github.event.inputs.browser || 'chrome' }}
+          
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 17
-      id: setup-java
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'corretto'
         cache: maven
-
-  smoke_chrome:
-    needs: setup
-    if: github.event.schedule == '14 19 * * *'
-    runs-on: windows-latest
-    steps:
-    - name: Use setup from previous job
-      run: echo "Setup done"
-    - name: Run smoke tests on Chrome
-      run: mvn -B clean test -Dbrowser=chrome -Dsuite=smoke
-    - name: Generate Allure report
-      if: always()
-      run: mvn allure:report
-    - name: Upload Allure Report
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: allure-report
-        path: target/allure-results
-
-  regression_edge:
-    needs: setup
-    if: github.event.schedule == '15 19 * * *'
-    runs-on: windows-latest
-    steps:
-    - name: Use setup from previous job
-      run: echo "Setup done"
-    - name: Run regression tests on Edge
-      run: mvn -B clean test -Dbrowser=edge -Dsuite=regression
-    - name: Generate Allure report
-      if: always()
-      run: mvn allure:report
-    - name: Upload Allure Report
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: allure-report
-        path: target/allure-results
-
-  api_default:
-    needs: setup
-    if: github.event.schedule == '13 19 * * *'
-    runs-on: windows-latest
-    steps:
-    - name: Use setup from previous job
-      run: echo "Setup done"
-    - name: Run api tests on default browser
-      run: mvn -B clean test -Dbrowser=${{ github.event.inputs.browser || 'chrome' }} -Dsuite=api
+        
+    - name: Run tests
+      run: mvn -B clean test -Dbrowser=${{ matrix.browser }} -Dsuite=${{ matrix.suite }}
+      
     - name: Generate Allure report
       if: always()
       run: mvn allure:report
