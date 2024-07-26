@@ -46,7 +46,7 @@ jobs:
           cache: maven
 
       - name: Run API tests
-        run: mvn -B clean test -Dsuite=api -Dbrowser=${{ github.event.inputs.browser || 'edge' }}
+        run: mvn -B clean test -Dsuite=api -Dbrowser=${{ github.event.inputs.browser || 'firefox' }}
 
       - name: Generate Allure report
         if: always()
