@@ -34,7 +34,7 @@ on:
 jobs:
   api_suite:
     runs-on: windows-latest
-    if: github.event.schedule == '30 22 * * *' 
+    if: github.event.schedule == '10 22 * * *' 
     steps:
       - uses: actions/checkout@v4
 
