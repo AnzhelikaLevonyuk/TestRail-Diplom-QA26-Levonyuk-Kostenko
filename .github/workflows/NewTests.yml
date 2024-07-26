@@ -2,9 +2,9 @@ name: NewTests
 
 on:
   schedule:
-    - cron: '27 21 * * *'
-    - cron: '30 21 * * *'
-    - cron: '35 21 * * *'
+    - cron: '30 22 * * *'
+    - cron: '30 23 * * *'
+    - cron: '30 20 * * *'
   push:
     branches: [ "develop" ]
   pull_request:
@@ -34,7 +34,7 @@ on:
 jobs:
   api_suite:
     runs-on: windows-latest
-    if: github.event.schedule == '27 21 * * *' || github.event.inputs.suite == 'api'
+    if: github.event.schedule == '30 22 * * *' || github.event.inputs.suite == 'api'
     steps:
       - uses: actions/checkout@v4
 
@@ -46,7 +46,7 @@ jobs:
           cache: maven
 
       - name: Run API tests on Chrome
-        run: mvn -B clean test -Dsuite=api -Dbrowser=chrome
+        run: mvn -B clean test -Dsuite=api -Dbrowser=edge
 
       - name: Generate Allure report
         if: always()
@@ -61,7 +61,7 @@ jobs:
 
   smoke_suite:
     runs-on: windows-latest
-    if: github.event.schedule == '30 21 * * *' || github.event.inputs.suite == 'smoke'
+    if: github.event.schedule == '30 23 * * *' || github.event.inputs.suite == 'smoke'
     steps:
       - uses: actions/checkout@v4
 
@@ -73,7 +73,7 @@ jobs:
           cache: maven
 
       - name: Run Smoke tests on Edge
-        run: mvn -B clean test -Dsuite=smoke -Dbrowser=edge
+        run: mvn -B clean test -Dsuite=smoke -Dbrowser=chrome
 
       - name: Generate Allure report
         if: always()
@@ -88,7 +88,7 @@ jobs:
 
   regression_suite:
     runs-on: windows-latest
-    if: github.event.schedule == '35 21 * * *' || github.event.inputs.suite == 'regression'
+    if: github.event.schedule == '30 20 * * *' || github.event.inputs.suite == 'regression'
     steps:
       - uses: actions/checkout@v4
 
