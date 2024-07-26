@@ -2,9 +2,9 @@ name: NewTests
 
 on:
   schedule:
-    - cron: '30 22 * * *'
-    - cron: '30 23 * * *'
-    - cron: '30 20 * * *'
+    - cron: '20 22 * * *'
+    - cron: '35 22 * * *'
+    - cron: '40 22 * * *'
   push:
     branches: [ "develop" ]
   pull_request:
@@ -34,7 +34,7 @@ on:
 jobs:
   api_suite:
     runs-on: windows-latest
-    if: github.event.schedule == '10 22 * * *' 
+    if: github.event.schedule == '22 22 * * *' || github.event.inputs.suite == 'api'
     steps:
       - uses: actions/checkout@v4
 
@@ -45,8 +45,8 @@ jobs:
           distribution: 'corretto'
           cache: maven
 
-      - name: Run API tests on Chrome
-        run: mvn -B clean test -Dsuite=api -Dbrowser=edge
+      - name: Run API tests
+        run: mvn -B clean test -Dsuite=api -Dbrowser=${{ github.event.inputs.browser || 'edge' }}
 
       - name: Generate Allure report
         if: always()
@@ -61,7 +61,7 @@ jobs:
 
   smoke_suite:
     runs-on: windows-latest
-    if: github.event.schedule == '30 23 * * *' || github.event.inputs.suite == 'smoke'
+    if: github.event.schedule == '30 22 * * *' || github.event.inputs.suite == 'smoke'
     steps:
       - uses: actions/checkout@v4
 
@@ -72,8 +72,8 @@ jobs:
           distribution: 'corretto'
           cache: maven
 
-      - name: Run Smoke tests on Edge
-        run: mvn -B clean test -Dsuite=smoke -Dbrowser=chrome
+      - name: Run Smoke tests
+        run: mvn -B clean test -Dsuite=smoke -Dbrowser=${{ github.event.inputs.browser || 'chrome' }}
 
       - name: Generate Allure report
         if: always()
@@ -88,7 +88,7 @@ jobs:
 
   regression_suite:
     runs-on: windows-latest
-    if: github.event.schedule == '30 20 * * *' || github.event.inputs.suite == 'regression'
+    if: github.event.schedule == '40 22 * * *' || github.event.inputs.suite == 'regression'
     steps:
       - uses: actions/checkout@v4
 
@@ -99,7 +99,7 @@ jobs:
           distribution: 'corretto'
           cache: maven
 
-      - name: Run Regression tests on default browser
+      - name: Run Regression tests
         run: mvn -B clean test -Dbrowser=${{ github.event.inputs.browser || 'chrome' }} -Dsuite=regression
 
       - name: Generate Allure report
@@ -112,4 +112,3 @@ jobs:
         with:
           name: allure-report-${{ github.run_id }}
           path: target/allure-results
-     
