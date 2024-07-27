@@ -7,7 +7,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class MilestoneInfoPage extends BaseDashboardPage {
-
     private static final By MILESTONE_NAME = By.cssSelector("[data-testid='testCaseContentHeaderTitle']");
     private static final By MILESTONE_DESCRIPTION = By.cssSelector(".markdown  p");
     private static final By MILESTONE_START_DATE = By.className("text-softer");

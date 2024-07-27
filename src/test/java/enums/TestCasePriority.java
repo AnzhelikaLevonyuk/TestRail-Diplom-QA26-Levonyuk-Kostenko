@@ -9,7 +9,7 @@ public enum TestCasePriority {
     LOW("Low");
 
 
-    private String name;
+    private final String name;
 
     TestCasePriority(String name) {
         this.name = name;

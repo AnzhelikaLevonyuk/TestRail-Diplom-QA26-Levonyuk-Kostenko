@@ -1,6 +1,4 @@
 package utils;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -13,7 +11,7 @@ public class PropertyReader {
     private PropertyReader() {
     }
 
-    private static String getCorrectPath() throws FileNotFoundException {
+    private static String getCorrectPath() {
         if (propertiesPath.charAt(0) != '/')
             propertiesPath = "/" + propertiesPath;
         return propertiesPath;

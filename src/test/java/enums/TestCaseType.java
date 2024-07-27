@@ -16,7 +16,7 @@ public enum TestCaseType {
     SMOKE("Smoke"),
     USABILITY("Usability");
 
-    private String name;
+    private final String name;
 
     TestCaseType(String name) {
         this.name = name;

@@ -13,12 +13,10 @@ import java.io.File;
 
 @Log4j2
 public class BaseDashboardPage extends BasePage {
-
     private static final By DASHBOARD_TAB = By.id("navigation-dashboard");
     private static final By RETURN_TO_DASHBOARD = By.id("navigation-dashboard-top");
     private static final By MILESTONES_TAB = By.id("navigation-milestones");
     private static final By TEST_CASES_TAB = By.id("navigation-suites");
-
     private static final By ADD_ATTACHMENT_BUTTON = By.id("entityAttachmentListEmptyIcon");
     private static final By ADD_ATTACHMENT_DIALOG_SUBMIT_BUTTON = By.cssSelector("[data-testid='addAttachmentDialogSubmit']");
     private static final By ATTACHMENT_LIST = By.cssSelector("[data-testid='attachmentListItem']");
@@ -64,7 +62,6 @@ public class BaseDashboardPage extends BasePage {
             driver.findElement(RETURN_TO_DASHBOARD).click();
         }
     }
-
     @Step("Add attachment")
     public void addAttachment(File uploadFile) {
         log.info("Adding attacment - {}", uploadFile);

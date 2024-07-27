@@ -7,7 +7,7 @@ public enum TestCaseStatus {
     DESIGN("Design"),
     REVIEW("Review");
 
-    private String name;
+    private final String name;
 
     TestCaseStatus(String name) {
         this.name = name;

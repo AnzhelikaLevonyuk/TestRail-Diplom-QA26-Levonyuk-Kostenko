@@ -20,7 +20,6 @@ public class AddMilestonePage extends BaseDashboardPage {
     private static final String MILESTONE_CREATE_BUTTON = "milestoneButtonOk";
     private static final String MILESTONE_START_DATE = "addEditMilestoneStartOn";
     private static final String MILESTONE_END_DATE = "addEditMilestoneDueOn";
-
     private static final By ERROR_MESSAGE = By.cssSelector("div + .message-error");
 
     public AddMilestonePage(WebDriver driver)

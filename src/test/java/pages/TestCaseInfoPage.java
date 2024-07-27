@@ -11,8 +11,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class TestCaseInfoPage extends BaseDashboardPage {
-
-
     private static final By TITLE = By.cssSelector("[data-testid ='testCaseContentHeaderTitle']");
     private static final By TYPE = By.cssSelector("td[data-testid ='testCaseViewCellTypeId']");
     private static final By PRIORITY = By.cssSelector("td[data-testid='testCaseViewCellPriorityId']");

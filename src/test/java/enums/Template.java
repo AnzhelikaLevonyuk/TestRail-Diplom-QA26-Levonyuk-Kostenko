@@ -1,7 +1,5 @@
 package enums;
 
-import java.util.Arrays;
-
 public enum Template {
     BEHAVIOUR_DRIVEN_DEVELOPMENT("Behaviour Driven Development"),
     EXPLORATORY_SESSION("Exploratory Session"),
@@ -9,7 +7,7 @@ public enum Template {
     TEST_CASE_TEXT("Test Case (Text)");
 
 
-    private String name;
+    private final String name;
 
     Template(String name) {
         this.name = name;
@@ -19,9 +17,4 @@ public enum Template {
         return this.name;
     }
 
-    public static Template getFromName(String name) {
-        return Arrays.stream(Template.values())
-                .filter(value -> value.getName().equals(name))
-                .findFirst().orElse(null);
-    }
 }

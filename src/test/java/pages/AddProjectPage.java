@@ -10,8 +10,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 @Log4j2
 public class AddProjectPage extends BasePage {
-
-
     private static final String PROJECT_NAME = "addProjectNameInput";
     private static final String ANNOUNCEMENT = "addEditProjectAnnouncement";
     private static final String CHECK_BOX_SHOW_THE_ANNOUNCEMENT = "addEditProjectShowAnnouncement";

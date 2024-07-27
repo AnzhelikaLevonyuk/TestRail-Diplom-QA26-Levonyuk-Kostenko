@@ -14,7 +14,6 @@ import java.util.List;
 public class TestCasesPage extends BaseDashboardPage {
     private static final String ADD_TEST_CASE_BUTTON = "sidebarCasesAdd";
     private static final String ADD_SECTION_BUTTON = "addSectionInline";
-
     private static final String ATTACHMENT = "//div[contains(@title, '%s')]";
     private static final By TEST_CASES_LIST = By.xpath("//span[@data-testid = 'sectionCaseTitle']");
     private static final By SECTION_LIST = By.cssSelector(".groupTreeContainer a span");
@@ -24,7 +23,6 @@ public class TestCasesPage extends BaseDashboardPage {
     private static final By NO_TEST_CASE_TEXT = By.id("groupsEmpty");
     private static final String TEST_CASE_SECTION = "//span[text()='%s']/ancestor::tr";
     private static final String DELETE_TEST_CASE_BUTTON = "//span[text() = '%s']/../following::a[@class= 'deleteLink']";
-
     private static final String TEST_CASE_TITLE = "//tbody/tr/following-sibling::tr[starts-with(@id, 'row')]//span[text()='%s']";
 
     public TestCasesPage(WebDriver driver)

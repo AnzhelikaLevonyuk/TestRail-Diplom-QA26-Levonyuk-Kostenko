@@ -13,7 +13,6 @@ import utils.PropertyReader;
 import java.util.List;
 
 public class LoginPage extends BasePage {
-
     private static final String EMAIL = "loginIdName";
     private static final String PASSWORD = "loginPasswordFormDialog";
     private static final String LOGIN_BUTTON = "loginButtonPrimary";
@@ -40,10 +39,6 @@ public class LoginPage extends BasePage {
         new Input(driver, EMAIL).setValue(email);
         new Input(driver, PASSWORD).setValue(password);
         new ElementDecorator(driver, LOGIN_BUTTON).click();
-    }
-
-    public boolean isLoginButtonEnabled() {
-        return new ElementDecorator(driver, LOGIN_BUTTON).isEnabled();
     }
 
     public boolean isErrorMessageDisplayed() {

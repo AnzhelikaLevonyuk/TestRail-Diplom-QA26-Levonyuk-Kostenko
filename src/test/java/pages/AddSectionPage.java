@@ -11,7 +11,6 @@ import org.openqa.selenium.WebDriver;
 
 @Log4j2
 public class AddSectionPage extends BaseDashboardPage {
-
     private static final By SECTION_NAME = By.id("editSectionName");
     private static final By SECTION_DESCRIPTION = By.id("editSectionDescription_display");
     private static final By ADD_SECTION = By.id("editSectionSubmit");

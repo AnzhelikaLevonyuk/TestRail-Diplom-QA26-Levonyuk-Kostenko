@@ -1,11 +1,6 @@
 package apiTests;
 
 import controllers.*;
-
-import controllers.MilestoneController;
-import controllers.ProjectController;
-import controllers.TestRunController;
-
 import io.restassured.response.Response;
 import models.Milestone;
 import models.Plan;
