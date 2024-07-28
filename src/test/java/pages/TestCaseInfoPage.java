@@ -60,6 +60,7 @@ public class TestCaseInfoPage extends BaseDashboardPage {
 
     @Step("Click 'Edit Test case' button")
     public void clickEditTestCaseButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(EDIT_BUTTON_TEST_CASE));
         new Button(driver, EDIT_BUTTON_TEST_CASE).click();
     }
 }

@@ -18,18 +18,6 @@ public class DropDown extends ElementDecorator {
         super(driver, element);
     }
 
-    public DropDown(WebDriver driver, By locator) {
-        super(driver, locator);
-    }
-
-    public DropDown(WebDriver driver, String dataTestId) {
-        super(driver, dataTestId);
-    }
-
-    public String getSelectedOption() {
-        return element.findElement(expandButton).getText();
-    }
-
     public void selectByVisibleText(String value) {
         expand();
         WebElement option = this.getOptionByText(value);
@@ -43,16 +31,10 @@ public class DropDown extends ElementDecorator {
         }
 
     }
-
-    public List<String> getAllOptionsText() {
-        return this.getAllOptions().stream().map(WebElement::getText).toList();
-    }
-
     public void setSearchValue(String value) {
         element.findElement(searchInput).sendKeys(value);
 
     }
-
     private void expand() {
         element.findElement(expandButton).click();
     }
@@ -60,7 +42,6 @@ public class DropDown extends ElementDecorator {
     private WebElement getOptionByText(String value) {
         return this.getAllOptions().stream().filter(opt -> opt.getText().equals(value)).findFirst().orElse(null);
     }
-
     private List<WebElement> getAllOptions() {
         return element.findElements(options);
     }

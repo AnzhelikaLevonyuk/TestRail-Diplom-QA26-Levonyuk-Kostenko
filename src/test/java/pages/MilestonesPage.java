@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 public class MilestonesPage extends BaseDashboardPage {
     private static final String ADD_MILESTONE = "navigationMilestonesAdd";
     private static final String DELETE_MILESTONE_CONTAINER = "//td/a[text()='%s']//ancestor::div[@id='completed']//a[@class = 'deleteLink']";
-    private static final String MILESTONES_CONTAINER = "//a[starts-with(@href, 'index.php?/milestones/view') and text()='%s']";
+    private static final String MILESTONES_CONTAINER = "//table[contains(@class, 'run-grid')]//a[text()='%s']";
 
 
     public MilestonesPage(WebDriver driver)
