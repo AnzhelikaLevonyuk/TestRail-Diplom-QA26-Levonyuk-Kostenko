@@ -1,4 +1,4 @@
-name: NewTests
+name: TestRail Tests
 
 on:
   schedule:
