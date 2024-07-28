@@ -2,9 +2,9 @@ name: TestRail Tests
 
 on:
   schedule:
-    - cron: '20 08 * * *'
-    - cron: '25 08 * * *'
-    - cron: '30 08 * * *'
+    - cron: '15 10 * * *'
+    - cron: '20 10 * * *'
+    - cron: '25 10 * * *'
   push:
     branches: [ "main" ]
   pull_request:
@@ -34,7 +34,7 @@ on:
 jobs:
   api_suite:
     runs-on: windows-latest
-    if: github.event.schedule == '20 08 * * *' || github.event.inputs.suite == 'api'
+    if: github.event.schedule == '15 10 * * *' || github.event.inputs.suite == 'api'
     steps:
       - uses: actions/checkout@v4
 
@@ -61,7 +61,7 @@ jobs:
 
   smoke_suite:
     runs-on: windows-latest
-    if: github.event.schedule == '25 08 * * *' || github.event.inputs.suite == 'smoke'
+    if: github.event.schedule == '20 10 * * *' || github.event.inputs.suite == 'smoke'
     steps:
       - uses: actions/checkout@v4
 
@@ -88,7 +88,7 @@ jobs:
 
   regression_suite:
     runs-on: windows-latest
-    if: github.event.schedule == '30 08 * * *' || github.event.inputs.suite == 'regression'
+    if: github.event.schedule == '25 10 * * *' || github.event.inputs.suite == 'regression'
     steps:
       - uses: actions/checkout@v4
 
