@@ -1,8 +1,6 @@
 package decorators;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
@@ -27,18 +25,6 @@ public class ElementDecorator implements WebElement {
         this.driver = driver;
         this.dataTestId = dataTestId;
         this.element = driver.findElement(By.cssSelector(String.format("[data-testid = %s]", this.dataTestId)));
-    }
-
-    public ElementDecorator findElementDecorator(By locator) {
-        return new ElementDecorator(this.driver, locator);
-    }
-
-    public List<ElementDecorator> findElementsDecorator(By locator) {
-        List<ElementDecorator> result = new ArrayList<>();
-        for (WebElement elements : element.findElements(locator)) {
-            result.add(new ElementDecorator(driver, elements));
-        }
-        return result;
     }
 
     public void scrollIntoView() {

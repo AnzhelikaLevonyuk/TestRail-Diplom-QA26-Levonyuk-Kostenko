@@ -23,7 +23,4 @@ public class TextArea extends ElementDecorator {
         log.debug("Setting value = {} into text area with data-testid = {}", keysToSend, this.dataTestId);
         element.sendKeys(keysToSend);
     }
-    public void clearValue() {
-        element.clear();
-    }
 }
